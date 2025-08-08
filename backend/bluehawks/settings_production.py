@@ -13,7 +13,7 @@ DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY', 'Bluehawks@85410685')
 
 # Update allowed hosts for production
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,mystick.online,www.mystick.online').split(',')
 
 # CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://bluehawks.onrender.com').split(',')

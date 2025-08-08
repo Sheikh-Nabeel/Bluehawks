@@ -22,7 +22,7 @@ services:
           name: bluehawks-db
           property: connectionString
       - key: ALLOWED_HOSTS
-        value: .onrender.com
+        value: .onrender.com,mystick.online,www.mystick.online
       - key: DEBUG
         value: false
       - key: DJANGO_SETTINGS_MODULE
