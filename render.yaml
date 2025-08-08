@@ -14,7 +14,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: SECRET_KEY
-        generateValue: true
+        value: Bluehawks@85410685
       - key: WEB_CONCURRENCY
         value: 4
       - key: DATABASE_URL
@@ -26,4 +26,20 @@ services:
       - key: DEBUG
         value: false
       - key: DJANGO_SETTINGS_MODULE
-        value: bluehawks.settings_production 
+        value: bluehawks.settings_production
+      - key: TIME_ZONE
+        value: Asia/Karachi
+      - key: LANGUAGE_CODE
+        value: en-us
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://bluehawks.onrender.com
+      - key: EMAIL_HOST
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: 587
+      - key: EMAIL_USE_TLS
+        value: true
+      - key: EMAIL_HOST_USER
+        value: info@bluehawkssecurities.com
+      - key: EMAIL_HOST_PASSWORD
+        value: Bluehawk@786 

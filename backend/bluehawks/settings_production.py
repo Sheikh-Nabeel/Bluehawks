@@ -10,10 +10,17 @@ from .settings import *
 DEBUG = False
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-36wy_+(ufvcp)5nm@0y-$-bn9%1931rz0pu_i4(m*m&+n@0s8p')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'Bluehawks@85410685')
 
 # Update allowed hosts for production
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://bluehawks.onrender.com').split(',')
+
+# Time Zone and Language
+TIME_ZONE = os.environ.get('TIME_ZONE', 'Asia/Karachi')
+LANGUAGE_CODE = os.environ.get('LANGUAGE_CODE', 'en-us')
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -54,6 +61,15 @@ X_FRAME_OPTIONS = 'DENY'
 # Session security
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'info@bluehawkssecurities.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'Bluehawk@786')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Logging
 LOGGING = {
