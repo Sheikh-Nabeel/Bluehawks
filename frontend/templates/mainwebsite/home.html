@@ -1,0 +1,1454 @@
+{% extends 'mainwebsite/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            min-width: 100vw;
+            box-sizing: border-box;
+            background: #ffffff;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        body {
+            width: 100vw;
+            min-width: 100vw;
+            overflow-x: hidden;
+            background: #ffffff;
+            margin-top: 0;
+            padding-top: 70px;
+        }
+        main {
+            padding: 40px 0;
+            text-align: center;
+            min-height: 60vh;
+            background: #ffffff;
+        }
+        .section-title {
+            color: #ffe082;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .section-subtitle {
+            color: #cfd8e3;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        /* Video container */
+        .video-container {
+            width: 100vw;
+            height: calc(100vh - 70px);
+            position: relative;
+            z-index: 1;
+            margin-top: 0;
+            display: block;
+            clear: both;
+            top: 0;
+            overflow: hidden;
+        }
+        
+        /* Video banner */
+        .video-banner {
+            width: 100vw;
+            height: 100vh;
+            max-height: calc(100vh - 70px);
+            object-fit: cover;
+            object-position: center;
+            border-radius: 0;
+            box-shadow: 0 8px 32px 0 rgba(10,35,66,0.18);
+            margin-bottom: 0;
+            display: block;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            margin-top: 0;
+        }
+        /* Services Section */
+        .services-section {
+            width: 100vw;
+            min-width: 100vw;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 32px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 48px 5% 48px 5%;
+            box-sizing: border-box;
+            margin-bottom: 0;
+            border-bottom: 3px solid #0a2342;
+        }
+        .service-box, .call-box {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            color: #0a2342;
+            border: 2px solid #e9ecef;
+            border-radius: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 40px 24px;
+            min-width: 200px;
+            max-width: 280px;
+            flex: 1 1 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-box:hover, .call-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            border-color: #0a2342;
+        }
+        .service-box i, .call-box i {
+            font-size: 2.5rem;
+            color: #0a2342;
+            margin-bottom: 16px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        .service-box:hover i, .call-box:hover i {
+            color: #185a9d;
+        }
+        .service-box p, .call-box p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0a2342;
+            margin: 0;
+            line-height: 1.4;
+        }
+        .call-box {
+            background: linear-gradient(145deg, #0a2342 0%, #185a9d 100%);
+            color: #ffe082;
+            border-color: #0a2342;
+        }
+        .call-box i {
+            color: #ffe082;
+        }
+        .call-box p {
+            color: #ffe082;
+        }
+        .call-box strong {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .call-box div {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        @media (max-width: 900px) {
+            .services-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 18px;
+            }
+            .service-box, .call-box {
+                max-width: 90vw;
+                min-width: 220px;
+            }
+        }
+        /* What We Do Section */
+        .what-we-do-section {
+            display: flex;
+            align-items: stretch;
+            padding: 0;
+            background: transparent;
+            width: 100vw;
+            box-sizing: border-box;
+            min-height: 500px;
+            margin-bottom: 0;
+            gap: 0;
+        }
+        .card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-card {
+            border-right: 1px solid #e9ecef;
+            background: linear-gradient(135deg, #0a2342 0%, #185a9d 100%);
+        }
+        .text-card {
+            border-left: 1px solid #e9ecef;
+            padding: 60px 40px;
+        }
+        .image-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+        .text-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            max-width: 600px;
+        }
+        .text-container h4 {
+            margin: 0 0 12px 0;
+            font-size: 1.1rem;
+            color: #0a2342;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .text-container h1 {
+            margin: 0 0 24px 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #0a2342;
+            line-height: 1.2;
+        }
+        .text-container p {
+            font-size: 1.15rem;
+            color: #333333;
+            line-height: 1.7;
+            margin: 0 0 20px 0;
+            text-align: center;
+        }
+        .text-container ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 20px 0 0 0;
+            text-align: left;
+            width: 100%;
+            max-width: 500px;
+        }
+        .text-container li {
+            margin: 12px 0 12px 0;
+            font-size: 1.1rem;
+            color: #0a2342;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 8px 0;
+        }
+        .text-container li i {
+            margin-right: 12px;
+            color: #185a9d;
+            min-width: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        @media (max-width: 768px) {
+            .what-we-do-section {
+                flex-direction: column;
+                min-height: unset;
+            }
+            .card {
+                padding: 30px 20px;
+            }
+            .image-card {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            .text-card {
+                border-left: none;
+                border-top: 1px solid #e9ecef;
+            }
+            .text-container {
+                padding: 20px 0;
+            }
+        }
+        /* Add similar color and style updates for other sections as needed... */
+    </style>
+</head>
+<body>
+    <style>
+      .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #25d366;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+      }
+      
+      .whatsapp-float:hover {
+        background-color: #128c7e;
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      }
+      
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .whatsapp-float {
+          width: 50px;
+          height: 50px;
+          bottom: 20px;
+          right: 20px;
+          font-size: 25px;
+        }
+      }
+    </style>
+    {% include 'mainwebsite/header.html' %}
+    <a href="https://wa.me/923253566677?text=Good day! I would like to inquire about your security services. Could you please provide information about the types of security solutions you offer?" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <div class="video-container">
+        <video class="video-banner" autoplay loop muted playsinline>
+            <source src="/static/video/home.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <script>
+        // Ensure video loops properly
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.video-banner');
+            
+            // Ensure video loops when it ends
+            video.addEventListener('ended', function() {
+                video.currentTime = 0;
+                video.play();
+            });
+            
+            // Ensure video plays on load
+            video.addEventListener('loadstart', function() {
+                video.play();
+            });
+            
+            // Handle any play errors and retry
+            video.addEventListener('error', function() {
+                console.log('Video error, attempting to reload...');
+                video.load();
+                video.play();
+            });
+        });
+    </script>
+    <div class="services-section">
+      <div class="service-box">
+        <i class="fas fa-user-shield"></i>
+        <p>Guarding Services</p>
+      </div>
+      <div class="service-box">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <p>Consultancy &<br>Training</p>
+      </div>
+      <div class="service-box">
+        <i class="fas fa-shield-alt"></i>
+        <p>Electronic Security</p>
+      </div>
+      <div class="call-box">
+        <i class="fas fa-headset"></i>
+        <div>
+          <strong>CALL US</strong><br>
+          051-8893131<br>
+        </div>
+      </div>
+    </div>
+    <div class="what-we-do-section">
+      <div class="card image-card">
+        <div class="image-container">
+          <img src="{% static 'images/homepage1.jpg' %}" alt="Security Guard">
+        </div>
+      </div>
+      <div class="card text-card">
+        <div class="text-container">
+          <h4>BLUEHAWKS SECURITY SERVICES</h4>
+          <h1>Our Core Services</h1>
+          <p>
+            Bluehawks Security Services provides professional protection solutions for people, property, and assets. Our trained staff operate in both routine and high-risk environments, offering reliable security in both static and mobile roles.
+          </p>
+          <ul>
+            <li><i class="fas fa-check"></i> Manned Guarding</li>
+            <li><i class="fas fa-check"></i> Electronic Security Systems</li>
+            <li><i class="fas fa-check"></i> Security Consultancy & Training</li>
+            <li><i class="fas fa-check"></i> Protocol Services (With & Without Transport)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      .guarding-section {
+        display: flex;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        width: 100vw;
+        margin: 0;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        box-sizing: border-box;
+        padding: 0;
+        margin-bottom: 0;
+        min-height: 500px;
+      }
+      .left-column {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+      .left-column .header {
+        background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+        color: #ffe082;
+        text-align: center;
+        padding: 20px 15px;
+        font-weight: bold;
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .left-column img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 0;
+        transition: transform 0.3s ease;
+      }
+      .left-column:hover img {
+        transform: scale(1.05);
+      }
+      .right-column {
+        flex: 1;
+        padding: 50px 40px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        color: #0a2342;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .right-column h3 {
+        margin: 0 0 20px 0;
+        color: #0a2342;
+        font-weight: bold;
+        letter-spacing: 1px;
+        font-size: 1.8rem;
+        line-height: 1.3;
+      }
+      .right-column p {
+        font-size: 1.1rem;
+        color: #0a2342;
+        line-height: 1.7;
+        margin-bottom: 20px;
+      }
+      .right-column ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 20px 0 0 0;
+      }
+      .right-column li {
+        margin: 12px 0;
+        font-size: 1.1rem;
+        color: #0a2342;
+        display: flex;
+        align-items: flex-start;
+        line-height: 1.5;
+      }
+      .right-column li i {
+        color: #185a9d;
+        margin-right: 12px;
+        margin-top: 2px;
+        font-size: 1.2rem;
+        min-width: 20px;
+      }
+      .read-more-btn {
+          display: inline-block;
+          margin-top: 30px;
+          padding: 12px 24px;
+          background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+          color: #ffe082;
+          text-decoration: none;
+          font-size: 1rem;
+          font-weight: bold;
+          border: 2px solid #0a2342;
+          border-radius: 0;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(10,35,66,0.15);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+      }
+      .read-more-btn:hover, .read-more-btn:focus {
+          background: #ffe082;
+          color: #0a2342;
+          box-shadow: 0 6px 20px rgba(10,35,66,0.25);
+          transform: translateY(-2px);
+      }
+      @media (max-width: 768px) {
+        .guarding-section {
+          flex-direction: column;
+        }
+        .right-column {
+          padding: 20px;
+        }
+      }
+    </style>
+    <div class="guarding-section">
+      <div class="left-column">
+        <div class="header">GUARDING SERVICES</div>
+        <img src="{% static 'images/homepage2.jpg' %}" alt="Guards on Road">
+      </div>
+      <div class="right-column">
+        <h3 style="margin-top:0; color:#0a2342; font-weight:bold; letter-spacing:1px;">OUR SECURITY PERSONNEL</h3>
+        <p>
+          At Bluehawks Security Services, we believe human resources are the backbone of any effective security operation. We provide a wide range of highly trained personnel to protect life and property—even in the most demanding environments.
+        </p>
+        <p style="margin-bottom:8px; font-weight:bold; color:#0a2342;">We offer:</p>
+        <ul>
+          <li><i class="fas fa-check"></i> Elite Commandos (Ex-SSG)</li>
+          <li><i class="fas fa-check"></i> Professional & Smart Security Guards<br><span style="font-size:0.97em; color:#0a2342;">(Ex-Army & Trained Civilians)</span></li>
+          <li><i class="fas fa-check"></i> Unarmed Security Guards</li>
+          <li><i class="fas fa-check"></i> Mobile Escort Services</li>
+          <li><i class="fas fa-check"></i> Close Protection Teams (VIP Security)</li>
+        </ul>
+      </div>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      .guarding-section-alt {
+        display: flex;
+        flex-wrap: wrap;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        width: 100vw;
+        margin: 0;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        box-sizing: border-box;
+        padding: 0;
+        margin-bottom: 0;
+        min-height: 500px;
+      }
+      .guarding-section-alt .left-column {
+        flex: 1;
+        min-width: 300px;
+        position: relative;
+        overflow: hidden;
+      }
+      .guarding-section-alt .left-column .header {
+        background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+        color: #ffe082;
+        text-align: center;
+        padding: 20px 15px;
+        font-weight: bold;
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .guarding-section-alt .left-column img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 0;
+        transition: transform 0.3s ease;
+      }
+      .guarding-section-alt .left-column:hover img {
+        transform: scale(1.05);
+      }
+      .guarding-section-alt .right-column {
+        flex: 1;
+        padding: 50px 40px;
+        background: linear-gradient(135deg, #e3f0fb 0%, #d4e6f1 100%);
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .guarding-section-alt .right-column h3 {
+        margin: 0 0 25px 0;
+        color: #0a2342;
+        font-weight: bold;
+        letter-spacing: 2px;
+        font-size: 2rem;
+        line-height: 1.2;
+        text-transform: uppercase;
+        text-align: center;
+        position: relative;
+      }
+      .guarding-section-alt .right-column h3::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+        border-radius: 2px;
+      }
+      .guarding-section-alt .right-column p {
+        font-size: 1.15rem;
+        color: #0a2342;
+        line-height: 1.8;
+        margin-bottom: 25px;
+        text-align: justify;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .guarding-section-alt .right-column ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 25px 0 0 0;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .guarding-section-alt .right-column li {
+        margin: 15px 0;
+        font-size: 1.1rem;
+        color: #0a2342;
+        display: flex;
+        align-items: flex-start;
+        line-height: 1.6;
+        padding: 8px 0;
+        border-left: 3px solid transparent;
+        padding-left: 15px;
+        transition: all 0.3s ease;
+      }
+      .guarding-section-alt .right-column li:hover {
+        border-left-color: #185a9d;
+        background: rgba(24,90,157,0.05);
+        padding-left: 20px;
+      }
+      .guarding-section-alt .right-column li i {
+        color: #185a9d;
+        margin-right: 15px;
+        margin-top: 3px;
+        font-size: 1.3rem;
+        min-width: 20px;
+        transition: transform 0.3s ease;
+      }
+      .guarding-section-alt .right-column li:hover i {
+        transform: scale(1.2);
+      }
+      @media (max-width: 768px) {
+        .guarding-section-alt {
+          flex-direction: column;
+        }
+        .guarding-section-alt .right-column, .guarding-section-alt .left-column {
+          order: unset;
+        }
+      }
+    </style>
+    <div class="guarding-section-alt">
+      <div class="right-column">
+        <h3 style="margin-top:0; color:#0a2342; font-weight:bold; letter-spacing:1px;">TECHNOLOGY-DRIVEN SECURITY SOLUTIONS</h3>
+        <p>
+          In today’s modern security landscape, technology plays a vital role in protecting people, assets, and infrastructure. At Bluehawks Security Services, we provide smart, reliable, and cost-effective electronic security solutions tailored to your needs.
+        </p>
+        <p style="margin-bottom:8px; font-weight:bold; color:#0a2342;">Our Offerings Include:</p>
+        <ul>
+          <li><i class="fas fa-check"></i> Multipurpose Fencing, Hydraulic / Jersey Barriers, and Under Vehicle Surveillance Systems</li>
+          <li><i class="fas fa-check"></i> CCTV Cameras, Scanners, and Walk-Through Gates</li>
+          <li><i class="fas fa-check"></i> Access Control Systems, Alarm & Response Systems, and Fleet Management Solutions</li>
+          <li><i class="fas fa-check"></i> Home Security Management Systems</li>
+        </ul>
+      </div>
+      <div class="left-column">
+        <div class="header">ELECTRONIC SECURITY SYSTEMS</div>
+        <img src="{% static 'images/homepage3.jpg' %}" alt="Guards on Road">
+      </div>
+    </div>
+    <style>
+      .guarding-section-alt2 {
+        display: flex;
+        flex-wrap: wrap;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        width: 100vw;
+        margin: 0;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        box-sizing: border-box;
+        padding: 0;
+        margin-bottom: 0;
+        min-height: 500px;
+      }
+      .guarding-section-alt2 .left-column {
+        flex: 1;
+        min-width: 300px;
+        position: relative;
+        overflow: hidden;
+      }
+      .guarding-section-alt2 .left-column .header {
+        background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+        color: #ffe082;
+        text-align: center;
+        padding: 20px 15px;
+        font-weight: bold;
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .guarding-section-alt2 .left-column img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 0;
+        transition: transform 0.3s ease;
+      }
+      .guarding-section-alt2 .left-column:hover img {
+        transform: scale(1.05);
+      }
+      .guarding-section-alt2 .right-column {
+        flex: 1;
+        padding: 50px 40px;
+        background: linear-gradient(135deg, #e3f0fb 0%, #d4e6f1 100%);
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .guarding-section-alt2 .right-column h3 {
+        margin: 0 0 25px 0;
+        color: #0a2342;
+        font-weight: bold;
+        letter-spacing: 2px;
+        font-size: 2rem;
+        line-height: 1.2;
+        text-transform: uppercase;
+        text-align: center;
+        position: relative;
+      }
+      .guarding-section-alt2 .right-column h3::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+        border-radius: 2px;
+      }
+      .guarding-section-alt2 .right-column p {
+        font-size: 1.15rem;
+        color: #0a2342;
+        line-height: 1.8;
+        margin-bottom: 25px;
+        text-align: justify;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .guarding-section-alt2 .right-column ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 25px 0 0 0;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .guarding-section-alt2 .right-column li {
+        margin: 15px 0;
+        font-size: 1.1rem;
+        color: #0a2342;
+        display: flex;
+        align-items: flex-start;
+        line-height: 1.6;
+        padding: 8px 0;
+        border-left: 3px solid transparent;
+        padding-left: 15px;
+        transition: all 0.3s ease;
+      }
+      .guarding-section-alt2 .right-column li:hover {
+        border-left-color: #185a9d;
+        background: rgba(24,90,157,0.05);
+        padding-left: 20px;
+      }
+      .guarding-section-alt2 .right-column li i {
+        color: #185a9d;
+        margin-right: 15px;
+        margin-top: 3px;
+        font-size: 1.3rem;
+        min-width: 20px;
+        transition: transform 0.3s ease;
+      }
+      .guarding-section-alt2 .right-column li:hover i {
+        transform: scale(1.2);
+      }
+      @media (max-width: 768px) {
+        .guarding-section-alt2 {
+          flex-direction: column;
+        }
+        .guarding-section-alt2 .right-column, .guarding-section-alt2 .left-column {
+          order: unset;
+        }
+      }
+    </style>
+    <div class="guarding-section-alt2">
+      <div class="left-column">
+        <div class="header">CONSULTANCY & TRAINING</div>
+        <img src="{% static 'images/homepage4.jpg' %}" alt="CONSULTANCY & TRAINING">
+      </div>
+      <div class="right-column">
+        <h3 style="margin-top:0; color:#0a2342; font-weight:bold; letter-spacing:1px;">TRAINING & SPECIALIZED COURSES</h3>
+        <p>
+          Bluehawks Security Services is committed to raising industry standards through professional training. In addition to training our own guards, supervisors, and officers, we also offer specialized short courses for individuals and organizations.
+        </p>
+        <p style="margin-bottom:8px; font-weight:bold; color:#0a2342;">Our Training Programs Include:</p>
+        <ul>
+          <li><i class="fas fa-check"></i> Security Surveys & Risk Audits</li>
+          <li><i class="fas fa-check"></i> Close Protection for VIPs/VVIPs</li>
+          <li><i class="fas fa-check"></i> Mobile Escort Techniques & Evasive Driving</li>
+          <li><i class="fas fa-check"></i> Personal Bodyguard Training</li>
+        </ul>
+      </div>
+    </div>
+    <style>
+      .fullpage-image-section {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 3px 0 3px 0;
+        padding: 0;
+      }
+      .fullpage-image-section img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        border-radius: 12px;
+      }
+      .fullpage-image-text {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: 0 2px 16px rgba(0,0,0,0.7);
+        width: 100vw;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        height: 100vh;
+        padding-top: 25vh;
+        animation: textGlow 3s ease-in-out infinite alternate;
+      }
+      
+      @keyframes textGlow {
+        0% {
+          text-shadow: 0 2px 16px rgba(0,0,0,0.7);
+        }
+        100% {
+          text-shadow: 0 4px 25px rgba(255,255,255,0.3), 0 2px 16px rgba(0,0,0,0.7);
+        }
+      }
+      
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (max-width: 768px) {
+        .fullpage-image-section, .fullpage-image-section img, .fullpage-image-text {
+          height: 60vh;
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+    <div class="fullpage-image-section">
+      <img src="{% static 'images/homepage5.jpg' %}" alt="Full Page Visual">
+      <div class="fullpage-image-text">SECURING TOMORROW WITH PROVEN EXPERIENCE AND STRATEGIC FORESIGHT</div>
+    </div>
+    <style>
+      .why-choose-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 50px;
+        gap: 40px;
+        background: #f8f8f8;
+        flex-wrap: wrap;
+        margin-bottom: 3px;
+      }
+      .why-choose-text-section {
+        flex: 1;
+        min-width: 300px;
+      }
+      .why-choose-text-section h2 {
+        color: #000;
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      .why-choose-text-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .why-choose-text-section li {
+        margin-bottom: 12px;
+        font-size: 16px;
+        display: flex;
+        align-items: flex-start;
+      }
+      .why-choose-text-section li::before {
+        content: '✔️';
+        color: gold;
+        margin-right: 10px;
+      }
+      .why-choose-slider-container {
+        flex: 1;
+        max-width: 500px;
+        min-width: 320px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid #185a9d;
+        border-radius: 12px;
+        background: #fff;
+        height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .why-choose-slider {
+        display: flex;
+        width: calc(100% * 5);
+        transition: transform 0.5s cubic-bezier(0.4,0.2,0.2,1);
+        height: 320px;
+      }
+      .why-choose-slider img {
+        width: 100%;
+        max-width: 500px;
+        flex-shrink: 0;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 12px;
+        background: #eee;
+        display: block;
+      }
+      .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .slider-arrow:hover {
+        background: rgba(0,0,0,0.8);
+      }
+      .slider-arrow.left {
+        left: 10px;
+      }
+      .slider-arrow.right {
+        right: 10px;
+      }
+      @media (max-width: 900px) {
+        .why-choose-container {
+          flex-direction: column;
+          padding: 30px;
+        }
+        .why-choose-slider-container {
+          max-width: 100%;
+        }
+      }
+    </style>
+    <script>
+      let currentSlide = 0;
+      const totalSlides = 5;
+      function showSlide(idx) {
+        const slider = document.querySelector('.why-choose-slider');
+        if (!slider) return;
+        // Clamp index to [0, totalSlides-1]
+        if (idx < 0) idx = totalSlides - 1;
+        if (idx >= totalSlides) idx = 0;
+        currentSlide = idx;
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      }
+      function nextSlide() { showSlide(currentSlide + 1); }
+      function prevSlide() { showSlide(currentSlide - 1); }
+      document.addEventListener('DOMContentLoaded', function() {
+        showSlide(0);
+        document.getElementById('slider-arrow-left').onclick = prevSlide;
+        document.getElementById('slider-arrow-right').onclick = nextSlide;
+        setInterval(function() {
+          nextSlide();
+        }, 3000);
+      });
+    </script>
+    <div class="why-choose-container">
+      <div class="why-choose-text-section">
+        <h2>WHY CHOOSE US</h2>
+        <ul>
+          <li>Professionally Trained Guards.</li>
+          <li>Nationwide Footprint.</li>
+          <li>Flagship Government and Private Clients.</li>
+          <li>Modern Security Techniques.</li>
+          <li>Government Compliant Company.</li>
+          <li>Government Certified Training Provider.</li>
+        </ul>
+      </div>
+      <div class="why-choose-slider-container">
+        <button class="slider-arrow left" id="slider-arrow-left" aria-label="Previous slide">&#8592;</button>
+        <div class="why-choose-slider">
+          <img src="{% static 'images/hslider1.JPG' %}" alt="Image 1">
+          <img src="{% static 'images/hslider2.JPG' %}" alt="Image 2">
+          <img src="{% static 'images/hslider3.JPG' %}" alt="Image 3">
+          <img src="{% static 'images/hslider4.JPG' %}" alt="Image 4">
+          <img src="{% static 'images/hslider5.JPG' %}" alt="Image 5">
+        </div>
+        <button class="slider-arrow right" id="slider-arrow-right" aria-label="Next slide">&#8594;</button>
+      </div>
+    </div>
+    <style>
+      .certification-strip {
+        width: 100vw;
+        background: #0a2342;
+        color: #fff;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 24px 0 20px 0;
+        letter-spacing: 1px;
+        margin-bottom: 3px;
+      }
+    </style>
+    <div class="certification-strip" id="certification">
+      Our International Certification
+    </div>
+    <style>
+      .cert-multi-slider-section {
+        width: 100vw;
+        background: #f8f8f8;
+        padding: 24px 0 24px 0;
+        margin-bottom: 3px;
+        display: flex;
+        justify-content: center;
+      }
+      .cert-multi-slider-container {
+        position: relative;
+        width: 90vw;
+        max-width: 1200px;
+        overflow: hidden;
+      }
+      .cert-multi-slider {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.4,0.2,0.2,1);
+        width: calc(100% * 5 / 3); /* 5 images, 3 visible at a time */
+      }
+      .cert-multi-slider img {
+        width: calc(100% / 5);
+        height: 220px;
+        object-fit: contain;
+        border-radius: 12px;
+        margin: 0 6px;
+        background: #fff;
+        padding: 12px;
+        box-sizing: border-box;
+      }
+      .cert-multi-slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .cert-multi-slider-arrow:hover {
+        background: rgba(0,0,0,0.8);
+      }
+      .cert-multi-slider-arrow.left {
+        left: 10px;
+      }
+      .cert-multi-slider-arrow.right {
+        right: 10px;
+      }
+      @media (max-width: 900px) {
+        .cert-multi-slider img {
+          width: 100%;
+          height: 180px;
+          margin: 0 2px;
+          padding: 8px;
+        }
+      }
+    </style>
+    <script>
+      let certCurrentSlide = 0;
+      const certTotalSlides = 5;
+      function certGetVisible() {
+        return window.innerWidth > 900 ? 3 : 1;
+      }
+      function certShowSlide(idx) {
+        const slider = document.querySelector('.cert-multi-slider');
+        if (!slider) return;
+        let visible = certGetVisible();
+        let maxSlide = certTotalSlides - visible;
+        if (maxSlide < 0) maxSlide = 0;
+        // Looping logic
+        if (idx < 0) {
+          certCurrentSlide = maxSlide;
+        } else if (idx > maxSlide) {
+          certCurrentSlide = 0;
+        } else {
+          certCurrentSlide = idx;
+        }
+        slider.style.transform = `translateX(-${certCurrentSlide * (100 / 5)}%)`;
+      }
+      function certNextSlide() {
+        certShowSlide(certCurrentSlide + 1);
+      }
+      function certPrevSlide() {
+        certShowSlide(certCurrentSlide - 1);
+      }
+      window.addEventListener('resize', function() { certShowSlide(certCurrentSlide); });
+      document.addEventListener('DOMContentLoaded', function() {
+        certShowSlide(0);
+        document.getElementById('cert-multi-slider-arrow-left').onclick = certPrevSlide;
+        document.getElementById('cert-multi-slider-arrow-right').onclick = certNextSlide;
+        setInterval(function() {
+          certNextSlide();
+        }, 2500);
+      });
+    </script>
+    <div class="cert-multi-slider-section">
+      <div class="cert-multi-slider-container">
+        <button class="cert-multi-slider-arrow left" id="cert-multi-slider-arrow-left" aria-label="Previous slide">&#8592;</button>
+        <div class="cert-multi-slider">
+          <img src="{% static 'images/Awards&certifications/0.jpg' %}" alt="Certification 1">
+          <img src="{% static 'images/Awards&certifications/1.jpg' %}" alt="Certification 2">
+          <img src="{% static 'images/Awards&certifications/2.jpg' %}" alt="Certification 3">
+          <img src="{% static 'images/Awards&certifications/3.jpg' %}" alt="Certification 4">
+          <img src="{% static 'images/Awards&certifications/4.jpg' %}" alt="Certification 5">
+            <img src="{% static 'images/Awards&certifications/5.jpg' %}" alt="Certification 6">
+          <img src="{% static 'images/Awards&certifications/6.jpg' %}" alt="Certification 7">
+        </div>
+        <button class="cert-multi-slider-arrow right" id="cert-multi-slider-arrow-right" aria-label="Next slide">&#8594;</button>
+      </div>
+    </div>
+    <style>
+      .clientele-strip {
+        width: 100vw;
+        background: #0a2342;
+        color: #fff;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 24px 0 20px 0;
+        letter-spacing: 1px;
+        margin-bottom: 0;
+      }
+    </style>
+    <style>
+      .clientele-slider-section {
+        width: 100vw;
+        background: #f8f8f8;
+        padding: 24px 0 0 0;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+      }
+      .clientele-slider-container {
+        position: relative;
+        width: 95vw;
+        max-width: 1400px;
+        overflow: hidden;
+      }
+      .clientele-slider {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.4,0.2,0.2,1);
+        width: calc(100% * 10 / 5); /* 10 images, 5 visible at a time */
+      }
+      .clientele-slider img {
+        width: calc(100% / 10);
+        height: 140px;
+        object-fit: contain;
+        border-radius: 12px;
+        margin: 0 4px;
+        background: #fff;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      .clientele-slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .clientele-slider-arrow:hover {
+        background: rgba(0,0,0,0.8);
+      }
+      .clientele-slider-arrow.left {
+        left: 10px;
+      }
+      .clientele-slider-arrow.right {
+        right: 10px;
+      }
+      @media (max-width: 900px) {
+        .clientele-slider img {
+          width: 100%;
+          height: 100px;
+          margin: 0 2px;
+          padding: 4px;
+        }
+      }
+      
+      /* Mobile Responsive Styles */
+      @media (max-width: 768px) {
+        .section-title {
+          font-size: 1.8rem;
+          margin-bottom: 15px;
+        }
+        
+        .section-subtitle {
+          font-size: 1rem;
+          margin-bottom: 25px;
+        }
+        
+        .services-section {
+          padding: 30px 3% 30px 3%;
+          gap: 20px;
+        }
+        
+        .service-box, .call-box {
+          min-width: 100%;
+          max-width: 100%;
+          padding: 30px 20px;
+        }
+        
+        .why-choose-container {
+          flex-direction: column;
+          padding: 20px 3%;
+        }
+        
+        .why-choose-text-section {
+          width: 100%;
+          margin-bottom: 30px;
+        }
+        
+        .why-choose-text-section h2 {
+          font-size: 1.8rem;
+        }
+        
+        .why-choose-text-section ul {
+          font-size: 0.95rem;
+        }
+        
+        .why-choose-slider-container {
+          width: 100%;
+        }
+        
+        .why-choose-slider img {
+          height: 200px;
+        }
+        
+        .certification-strip {
+          font-size: 1.5rem;
+          padding: 20px 0 15px 0;
+        }
+        
+        .cert-multi-slider-container {
+          width: 95vw;
+        }
+        
+        .cert-multi-slider img {
+          height: 150px;
+        }
+        
+        .clientele-strip {
+          font-size: 1.5rem;
+          padding: 20px 0 15px 0;
+        }
+        
+        .clientele-slider-container {
+          width: 95vw;
+        }
+        
+        .clientele-slider img {
+          height: 80px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .section-title {
+          font-size: 1.5rem;
+        }
+        
+        .section-subtitle {
+          font-size: 0.9rem;
+        }
+        
+        .services-section {
+          padding: 20px 2% 20px 2%;
+          gap: 15px;
+        }
+        
+        .service-box, .call-box {
+          padding: 25px 15px;
+        }
+        
+        .why-choose-text-section h2 {
+          font-size: 1.5rem;
+        }
+        
+        .why-choose-text-section ul {
+          font-size: 0.9rem;
+        }
+        
+        .certification-strip,
+        .clientele-strip {
+          font-size: 1.3rem;
+          padding: 15px 0 10px 0;
+        }
+      }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Clientele Section -->
+    <div class="clientele-strip" id="clientele">
+        CLIENTELE
+    </div>
+    <div class="clientele-slider-section">
+        <div class="clientele-slider-container">
+            <button class="clientele-slider-arrow left" id="clientele-slider-arrow-left" aria-label="Previous slide">&#8592;</button>
+            <div class="clientele-slider">
+                <img src="{% static 'Logo/attocklogo.png' %}" alt="Attock Logo">
+                <img src="{% static 'Logo/pso.png' %}" alt="PSO">
+                <img src="{% static 'Logo/shaafihospital.png' %}" alt="Shafii Hospital">
+                <img src="{% static 'Logo/khatoonhospital.jfif' %}" alt="Khatoon Hospital">
+                <img src="{% static 'Logo/nigerayebassy.jfif' %}" alt="Nigeria Embassy">
+                <img src="{% static 'Logo/comsats.jfif' %}" alt="Comsats">
+                <img src="{% static 'Logo/cpec.jfif' %}" alt="CPEC">
+                <img src="{% static 'Logo/Uhrs.png' %}" alt="UHRS">
+                <img src="{% static 'Logo/monteralmarki.jfif' %}" alt="Monteral Marki">
+                <img src="{% static 'Logo/imarassociates.jfif' %}" alt="Imar Associates">
+            </div>
+            <button class="clientele-slider-arrow right" id="clientele-slider-arrow-right" aria-label="Next slide">&#8594;</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  let clienteleCurrentSlide = 0;
+  const clienteleTotalSlides = 10;
+  function clienteleGetVisible() {
+    return window.innerWidth > 900 ? 5 : 1;
+  }
+  function clienteleShowSlide(idx) {
+    const slider = document.querySelector('.clientele-slider');
+    if (!slider) return;
+    let visible = clienteleGetVisible();
+    let maxSlide = clienteleTotalSlides - visible;
+    if (maxSlide < 0) maxSlide = 0;
+    // Looping logic
+    if (idx < 0) {
+      clienteleCurrentSlide = maxSlide;
+    } else if (idx > maxSlide) {
+      clienteleCurrentSlide = 0;
+    } else {
+      clienteleCurrentSlide = idx;
+    }
+    slider.style.transform = `translateX(-${clienteleCurrentSlide * (100 / 10)}%)`;
+  }
+  function clienteleNextSlide() {
+    clienteleShowSlide(clienteleCurrentSlide + 1);
+  }
+  function clientelePrevSlide() {
+    clienteleShowSlide(clienteleCurrentSlide - 1);
+  }
+  window.addEventListener('resize', function() { clienteleShowSlide(clienteleCurrentSlide); });
+  document.addEventListener('DOMContentLoaded', function() {
+    clienteleShowSlide(0);
+    document.getElementById('clientele-slider-arrow-left').onclick = clientelePrevSlide;
+    document.getElementById('clientele-slider-arrow-right').onclick = clienteleNextSlide;
+    setInterval(function() {
+      clienteleNextSlide();
+    }, 1000);
+  });
+</script>
+{% endblock %} 

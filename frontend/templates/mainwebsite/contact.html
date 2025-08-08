@@ -1,0 +1,834 @@
+{% extends 'mainwebsite/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            min-width: 100vw;
+            box-sizing: border-box;
+            background: #ffffff;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        body {
+            width: 100vw;
+            min-width: 100vw;
+            overflow-x: hidden;
+            background: #ffffff;
+        }
+        .contact-banner-img {
+            width: 100vw;
+            height: 40vh;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            box-shadow: 0 8px 32px 0 rgba(10,35,66,0.18);
+        }
+        .section-header {
+            background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+            color: #ffe082;
+            text-align: center;
+            padding: 28px 0 20px 0;
+            font-size: 2.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px rgba(10,35,66,0.10);
+            margin-bottom: 3px;
+        }
+        .contact {
+            background: linear-gradient(120deg, #ffffff 60%, #f8f9fa 100%);
+            padding: 48px 5% 48px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            border-radius: 18px;
+            box-shadow: 0 2px 18px rgba(0,0,0,0.10);
+            margin-bottom: 32px;
+        }
+        .contact .details {
+            flex: 1 1 300px;
+            font-size: 1.13rem;
+            line-height: 1.7;
+            color: #0a2342;
+        }
+        .contact .details p { margin-bottom: 16px; }
+        .contact .details a {
+            color: #185a9d;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.18s;
+        }
+        .contact .details a:hover {
+            color: #0a2342;
+        }
+        .contact .map {
+            flex: 1 1 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(10,35,66,0.10);
+        }
+        .contact .map iframe {
+            width: 100%;
+            height: 240px;
+            border: 0;
+            border-radius: 12px;
+        }
+        .divider {
+            width: 100%;
+            height: 60px;
+            background: #f8f9fa;
+            clip-path: polygon(0 0, 100% 30%, 100% 100%, 0% 100%);
+        }
+        .feedback {
+            background: #fff;
+            color: #0a2342;
+            padding: 48px 0 60px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            box-shadow: 0 2px 18px rgba(10,35,66,0.10);
+            margin-bottom: 32px;
+        }
+        .feedback h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #185a9d;
+        }
+        .feedback-form {
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            background: #f8f8f8;
+            padding: 36px 40px 28px 40px;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(10,35,66,0.10);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px 24px;
+            align-items: start;
+            justify-content: center;
+        }
+        .feedback-form .form-group {
+            margin-bottom: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .feedback-form .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .contact-banner-img {
+                height: 30vh;
+            }
+            
+            .section-header {
+                font-size: 1.6rem;
+                padding: 20px 0 15px 0;
+            }
+            
+            .contact {
+                flex-direction: column;
+                padding: 30px 3%;
+                gap: 25px;
+            }
+            
+            .contact .details {
+                flex: 1 1 100%;
+                font-size: 1rem;
+            }
+            
+            .contact .map {
+                flex: 1 1 100%;
+            }
+            
+            .contact .map iframe {
+                height: 200px;
+            }
+            
+            .feedback {
+                padding: 30px 3% 40px 3%;
+            }
+            
+            .feedback h2 {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+            
+            .feedback-form {
+                grid-template-columns: 1fr;
+                padding: 25px 20px 20px 20px;
+                gap: 15px;
+            }
+            
+            .feedback-form .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .feedback-form input,
+            .feedback-form textarea {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+            
+            .feedback-form button {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-banner-img {
+                height: 25vh;
+            }
+            
+            .section-header {
+                font-size: 1.4rem;
+                padding: 15px 0 10px 0;
+            }
+            
+            .contact {
+                padding: 20px 2%;
+                gap: 20px;
+            }
+            
+            .contact .details {
+                font-size: 0.95rem;
+            }
+            
+            .contact .map iframe {
+                height: 180px;
+            }
+            
+            .feedback {
+                padding: 20px 2% 30px 2%;
+            }
+            
+            .feedback h2 {
+                font-size: 1.4rem;
+            }
+            
+            .feedback-form {
+                padding: 20px 15px 15px 15px;
+                gap: 12px;
+            }
+            
+            .feedback-form input,
+            .feedback-form textarea {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .feedback-form button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        .form-group {
+            position: relative;
+            margin-bottom: 8px;
+            width: 100%;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 12px 8px 12px;
+            border: 1.5px solid #185a9d;
+            border-radius: 8px;
+            background: #fff;
+            color: #0a2342;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.2s, box-shadow 0.2s;
+            resize: none;
+            box-shadow: 0 1px 4px rgba(10,35,66,0.06);
+            box-sizing: border-box;
+            min-height: 44px; /* Touch-friendly minimum height */
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #ffe082;
+            box-shadow: 0 2px 8px rgba(255,224,130,0.13);
+        }
+        .form-group label {
+            position: absolute;
+            left: 14px;
+            top: 16px;
+            color: #185a9d;
+            font-size: 1rem;
+            pointer-events: none;
+            background: transparent;
+            transition: 0.2s;
+            z-index: 1;
+        }
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 10px;
+            font-size: 0.85rem;
+            color: #ffe082;
+            background: #f8f8f8;
+            padding: 0 4px;
+        }
+        .form-error {
+            color: #e31b23;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            min-height: 20px;
+            text-align: left;
+            padding-left: 4px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .form-error:empty {
+            display: none;
+        }
+        
+        .form-group input.error,
+        .form-group textarea.error {
+            border-color: #e31b23;
+            box-shadow: 0 0 0 2px rgba(227, 27, 35, 0.1);
+        }
+        
+        .form-group input.error:focus,
+        .form-group textarea.error:focus {
+            border-color: #e31b23;
+            box-shadow: 0 0 0 3px rgba(227, 27, 35, 0.15);
+        }
+        .feedback .submit-btn {
+            margin-left: 0;
+            padding: 12px 0;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+            color: #ffe082;
+            font-size: 1.08rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(10,35,66,0.10);
+            transition: background 0.2s, color 0.2s, box-shadow 0.18s, transform 0.18s;
+            letter-spacing: 1px;
+        }
+        .feedback .submit-btn:hover {
+            background: #ffe082;
+            color: #0a2342;
+            box-shadow: 0 4px 16px rgba(10,35,66,0.18);
+            transform: translateY(-2px) scale(1.04);
+        }
+        .feedback-form .form-group:not(.full-width):nth-child(odd) {
+          margin-right: 12px;
+        }
+        @media (max-width: 800px) {
+            .contact, .feedback {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .divider {
+                display: none;
+            }
+            .feedback-form {
+                grid-template-columns: 1fr;
+                padding: 24px 20px;
+                gap: 16px;
+                margin: 0 10px;
+            }
+            .feedback-form .form-group.full-width {
+                grid-column: 1 / -1;
+            }
+            .feedback-form .form-group:not(.full-width):nth-child(odd) {
+              margin-right: 0;
+            }
+            .form-group input,
+            .form-group textarea {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 16px 12px 8px 12px;
+            }
+        }
+        @media (max-width: 600px) {
+            .feedback {
+                padding: 20px 10px 30px 10px;
+            }
+            .feedback h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+            .feedback-form {
+                padding: 20px 15px;
+                gap: 12px;
+                margin: 0 5px;
+                border-radius: 12px;
+            }
+            .form-group input,
+            .form-group textarea {
+                font-size: 16px;
+                padding: 14px 10px 6px 10px;
+                border-radius: 6px;
+            }
+            .form-group label {
+                font-size: 0.9rem;
+                left: 12px;
+                top: 14px;
+            }
+            .form-group input:focus + label,
+            .form-group input:not(:placeholder-shown) + label,
+            .form-group textarea:focus + label,
+            .form-group textarea:not(:placeholder-shown) + label {
+                font-size: 0.75rem;
+                top: -8px;
+                left: 8px;
+            }
+            .feedback .submit-btn {
+                font-size: 1rem;
+                padding: 14px 0;
+                margin-top: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .feedback {
+                padding: 15px 5px 25px 5px;
+            }
+            .feedback-form {
+                padding: 15px 10px;
+                gap: 10px;
+                margin: 0 2px;
+            }
+            .form-group input,
+            .form-group textarea {
+                font-size: 16px;
+                padding: 12px 8px 4px 8px;
+            }
+            .form-group label {
+                font-size: 0.85rem;
+                left: 10px;
+                top: 12px;
+            }
+            .form-group input:focus + label,
+            .form-group input:not(:placeholder-shown) + label,
+            .form-group textarea:focus + label,
+            .form-group textarea:not(:placeholder-shown) + label {
+                font-size: 0.7rem;
+                top: -6px;
+                left: 6px;
+            }
+            .feedback .submit-btn {
+                font-size: 0.95rem;
+                padding: 12px 0;
+            }
+        }
+      /* Responsive tweaks for contact section */
+      @media (max-width: 1000px) {
+        .contact {
+          flex-direction: column;
+          gap: 0;
+        }
+        .contact .details, .contact .map {
+          width: 100%;
+          min-width: 0;
+          margin-bottom: 24px;
+        }
+        .contact .map iframe {
+          height: 180px;
+        }
+      }
+      @media (max-width: 700px) {
+        .section-header {
+          font-size: 1.2rem;
+          padding: 10px 0;
+        }
+        .contact {
+          padding: 24px 2vw;
+        }
+        .feedback {
+          padding: 18px 0 24px 0;
+        }
+        .divider {
+          height: 30px;
+        }
+      }
+      @media (max-width: 500px) {
+        .contact-banner-img {
+          height: 18vh;
+        }
+        .feedback-form {
+          padding: 8px 1vw 8px 1vw;
+        }
+        .form-group input, .form-group textarea {
+          font-size: 0.98rem;
+          padding: 12px 8px 6px 8px;
+        }
+        .feedback .submit-btn {
+          font-size: 1rem;
+        }
+      }
+      /* WhatsApp Float Button */
+      .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #25d366;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+      }
+      
+      .whatsapp-float:hover {
+        background-color: #128c7e;
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      }
+      
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .whatsapp-float {
+          width: 50px;
+          height: 50px;
+          bottom: 20px;
+          right: 20px;
+          font-size: 25px;
+        }
+      }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <img src="{% static 'images/homepage5.jpg' %}" alt="Contact Banner" class="contact-banner-img">
+    <div class="section-header">CONTACT US</div>
+    <section class="contact">
+      <div class="details">
+        <p><strong>Head Office:</strong><br>
+        Off. # 3-C 3rd Floor North Star Plaza<br>
+        Rehmanabad, Rwp</p>
+        <p><strong>Regional Office:</strong><br>
+        Office 5, Mariam Arcade, F Block<br>
+        PWD Road, NPF Islamabad</p>
+        <p>Phone: <a href="tel:051-2754949">051-2754949</a></p>
+        <p>
+          <a href="mailto:bluehawks317@gmail.com">bluehawks317@gmail.com</a>
+        </p>
+      </div>
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3324.526273715829!2d73.1282133!3d33.565682599999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfed00612b513f%3A0x8667891d5d93ef8b!2sGeneva%20Real%20Estate%20And%20Developers!5e0!3m2!1sen!2s!4v1754167132418!5m2!1sen!2s"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Bluehawks Security Services Location - Police Foundation"
+        ></iframe>
+      </div>
+    </section>
+    <div class="divider"></div>
+    <div class="section-header" id="message">SEND US A MESSAGE</div>
+    <section class="feedback">
+      <form class="feedback-form" id="feedbackForm" method="POST" action="{% url 'contact' %}" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" id="name" name="name" placeholder=" " required>
+          <label for="name">Name *</label>
+          <div class="form-error" id="error-name"></div>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" name="email" placeholder=" " required>
+          <label for="email">Email Address *</label>
+          <div class="form-error" id="error-email"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" id="phone" name="phone" placeholder=" ">
+          <label for="phone">Phone</label>
+          <div class="form-error" id="error-phone"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" id="city" name="city" placeholder=" ">
+          <label for="city">City</label>
+          <div class="form-error" id="error-city"></div>
+        </div>
+        <div class="form-group full-width">
+          <textarea id="message" name="message" placeholder=" " required></textarea>
+          <label for="message">Message *</label>
+          <div class="form-error" id="error-message"></div>
+        </div>
+        <button type="submit" class="submit-btn full-width">SUBMIT</button>
+      </form>
+    </section>
+    <script>
+      document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        let valid = true;
+        let errorCount = 0;
+        
+        // Clear all previous errors
+        document.querySelectorAll('.form-error').forEach(error => {
+          error.textContent = '';
+        });
+        
+        // Name validation
+        const name = document.getElementById('name');
+        const errorName = document.getElementById('error-name');
+        const nameValue = name.value.trim();
+        
+        if (!nameValue) {
+          errorName.textContent = '❌ Name is required.';
+          addErrorClass('name');
+          valid = false;
+          errorCount++;
+        } else if (nameValue.length < 2) {
+          errorName.textContent = '❌ Name must be at least 2 characters long.';
+          addErrorClass('name');
+          valid = false;
+          errorCount++;
+        } else if (nameValue.length > 50) {
+          errorName.textContent = '❌ Name cannot exceed 50 characters.';
+          addErrorClass('name');
+          valid = false;
+          errorCount++;
+        } else if (!/^[a-zA-Z\s]+$/.test(nameValue)) {
+          errorName.textContent = '❌ Name can only contain letters and spaces.';
+          addErrorClass('name');
+          valid = false;
+          errorCount++;
+        } else {
+          errorName.textContent = '';
+          removeErrorClass('name');
+        }
+        
+        // Email validation
+        const email = document.getElementById('email');
+        const errorEmail = document.getElementById('error-email');
+        const emailValue = email.value.trim();
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        if (!emailValue) {
+          errorEmail.textContent = '❌ Email address is required.';
+          addErrorClass('email');
+          valid = false;
+          errorCount++;
+        } else if (!emailPattern.test(emailValue)) {
+          errorEmail.textContent = '❌ Please enter a valid email address (e.g., user@example.com).';
+          addErrorClass('email');
+          valid = false;
+          errorCount++;
+        } else if (emailValue.length > 100) {
+          errorEmail.textContent = '❌ Email address is too long.';
+          addErrorClass('email');
+          valid = false;
+          errorCount++;
+        } else {
+          errorEmail.textContent = '';
+          removeErrorClass('email');
+        }
+        
+        // Phone validation (optional but must be valid if provided)
+        const phone = document.getElementById('phone');
+        const errorPhone = document.getElementById('error-phone');
+        const phoneValue = phone.value.trim();
+        
+        if (phoneValue) {
+          const cleanPhone = phoneValue.replace(/[\s\-\(\)]/g, '');
+          if (!/^(\+92|92|0)?[0-9]{10,11}$/.test(cleanPhone)) {
+            errorPhone.textContent = '❌ Please enter a valid Pakistan phone number (e.g., 03001234567 or +923001234567).';
+            addErrorClass('phone');
+            valid = false;
+            errorCount++;
+          } else if (phoneValue.length > 20) {
+            errorPhone.textContent = '❌ Phone number is too long.';
+            addErrorClass('phone');
+            valid = false;
+            errorCount++;
+          } else {
+            errorPhone.textContent = '';
+            removeErrorClass('phone');
+          }
+        } else {
+          errorPhone.textContent = '';
+          removeErrorClass('phone');
+        }
+        
+        // City validation (optional but must be valid if provided)
+        const city = document.getElementById('city');
+        const errorCity = document.getElementById('error-city');
+        const cityValue = city.value.trim();
+        
+        if (cityValue) {
+          if (cityValue.length < 2) {
+            errorCity.textContent = '❌ City name must be at least 2 characters long.';
+            addErrorClass('city');
+            valid = false;
+            errorCount++;
+          } else if (cityValue.length > 50) {
+            errorCity.textContent = '❌ City name cannot exceed 50 characters.';
+            addErrorClass('city');
+            valid = false;
+            errorCount++;
+          } else if (!/^[a-zA-Z\s]+$/.test(cityValue)) {
+            errorCity.textContent = '❌ City name can only contain letters and spaces.';
+            addErrorClass('city');
+            valid = false;
+            errorCount++;
+          } else {
+            errorCity.textContent = '';
+            removeErrorClass('city');
+          }
+        } else {
+          errorCity.textContent = '';
+          removeErrorClass('city');
+        }
+        
+        // Message validation
+        const message = document.getElementById('message');
+        const errorMessage = document.getElementById('error-message');
+        const messageValue = message.value.trim();
+        
+        if (!messageValue) {
+          errorMessage.textContent = '❌ Message is required.';
+          addErrorClass('message');
+          valid = false;
+          errorCount++;
+        } else if (messageValue.length < 10) {
+          errorMessage.textContent = '❌ Message must be at least 10 characters long.';
+          addErrorClass('message');
+          valid = false;
+          errorCount++;
+        } else if (messageValue.length > 1000) {
+          errorMessage.textContent = '❌ Message cannot exceed 1000 characters.';
+          addErrorClass('message');
+          valid = false;
+          errorCount++;
+        } else {
+          errorMessage.textContent = '';
+          removeErrorClass('message');
+        }
+        
+        // Show summary if there are errors
+        if (!valid) {
+          e.preventDefault();
+          
+          // Create or update error summary
+          let errorSummary = document.getElementById('error-summary');
+          if (!errorSummary) {
+            errorSummary = document.createElement('div');
+            errorSummary.id = 'error-summary';
+            errorSummary.style.cssText = `
+              background: #ffebee;
+              color: #c62828;
+              padding: 15px;
+              border-radius: 8px;
+              margin-bottom: 20px;
+              border: 1px solid #ffcdd2;
+              font-weight: 600;
+            `;
+            document.querySelector('.feedback-form').insertBefore(errorSummary, document.querySelector('.feedback-form').firstChild);
+          }
+          
+          errorSummary.innerHTML = `
+            <strong>⚠️ Form Validation Errors (${errorCount}):</strong><br>
+            Please correct the highlighted errors below before submitting.
+          `;
+          
+          // Scroll to first error
+          const firstError = document.querySelector('.form-error[style*="color: #e31b23"]') || 
+                           document.querySelector('.form-error:not(:empty)');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          
+          return false;
+        } else {
+          // Remove error summary if form is valid
+          const errorSummary = document.getElementById('error-summary');
+          if (errorSummary) {
+            errorSummary.remove();
+          }
+        }
+        
+        // Form is valid, allow it to submit
+        return true;
+      });
+      
+      // Real-time validation on input
+      document.querySelectorAll('#feedbackForm input, #feedbackForm textarea').forEach(field => {
+        field.addEventListener('blur', function() {
+          const fieldName = this.name;
+          const fieldValue = this.value.trim();
+          const errorElement = document.getElementById(`error-${fieldName}`);
+          
+          // Clear error when user starts typing
+          if (errorElement) {
+            errorElement.textContent = '';
+          }
+          
+          // Remove error class from field
+          this.classList.remove('error');
+          
+          // Remove error summary on any input
+          const errorSummary = document.getElementById('error-summary');
+          if (errorSummary) {
+            errorSummary.remove();
+          }
+        });
+        
+        // Add error class when field has error
+        field.addEventListener('input', function() {
+          const fieldName = this.name;
+          const errorElement = document.getElementById(`error-${fieldName}`);
+          if (errorElement && errorElement.textContent) {
+            this.classList.add('error');
+          } else {
+            this.classList.remove('error');
+          }
+        });
+      });
+      
+      // Function to add error class to fields with errors
+      function addErrorClass(fieldName) {
+        const field = document.querySelector(`[name="${fieldName}"]`);
+        if (field) {
+          field.classList.add('error');
+        }
+      }
+      
+      // Function to remove error class from fields
+      function removeErrorClass(fieldName) {
+        const field = document.querySelector(`[name="${fieldName}"]`);
+        if (field) {
+          field.classList.remove('error');
+        }
+      }
+    </script>
+{% endblock %} 

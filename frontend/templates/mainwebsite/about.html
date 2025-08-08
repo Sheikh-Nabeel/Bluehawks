@@ -1,0 +1,457 @@
+{% extends 'mainwebsite/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            min-width: 100vw;
+            box-sizing: border-box;
+            background: #ffffff;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        body {
+            width: 100vw;
+            min-width: 100vw;
+            overflow-x: hidden;
+            background: #ffffff;
+        }
+        .about-banner-img {
+            width: 100vw;
+            height: 40vh;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            box-shadow: 0 8px 32px 0 rgba(10,35,66,0.18);
+        }
+                 .about-bar {
+             width: 100vw;
+             background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+             color: #ffe082;
+             text-align: center;
+             font-size: 2.1rem;
+             font-weight: 700;
+             padding: 28px 0 20px 0;
+             letter-spacing: 1px;
+             margin-bottom: 3px;
+             border-radius: 0;
+             box-shadow: 0 2px 12px rgba(10,35,66,0.10);
+         }
+        .about-fss-container {
+            width: 100vw;
+            margin: 0;
+            background: transparent;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            gap: 0;
+            margin-bottom: 32px;
+        }
+        .about-card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 30px;
+            background: linear-gradient(120deg, #ffffff 60%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            box-shadow: 0 2px 18px rgba(0,0,0,0.10);
+            border-radius: 0;
+        }
+        .image-card {
+            border-right: 1px solid #e9ecef;
+            padding: 0;
+        }
+        .text-card {
+            border-left: 1px solid #e9ecef;
+        }
+        .about-fss-text {
+            width: 100%;
+            color: #0a2342;
+            text-align: center;
+        }
+        .about-fss-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .about-fss-image img {
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: 0 2px 12px rgba(10,35,66,0.10);
+        }
+        .about-fss-container h1 {
+            color: #0a2342;
+            margin-bottom: 20px;
+            font-size: 2.1rem;
+            letter-spacing: 1px;
+        }
+        .about-fss-container p {
+            margin-bottom: 30px;
+            font-size: 1.13rem;
+            text-align: justify;
+            color: #333333;
+        }
+                 .about-team-bar {
+             width: 100vw;
+             background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+             color: #ffe082;
+             text-align: center;
+             font-size: 2.1rem;
+             font-weight: 700;
+             padding: 28px 0 20px 0;
+             letter-spacing: 1px;
+             margin-bottom: 3px;
+             border-radius: 0;
+             box-shadow: 0 2px 12px rgba(10,35,66,0.10);
+         }
+        .about-team-section {
+            width: 100vw;
+            background: #ffffff;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 32px 16px 24px 16px;
+            margin-bottom: 3px;
+            overflow-x: auto;
+        }
+        .about-team-member {
+            position: relative;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+            width: calc((100vw - 64px - 24px) / 4);
+            min-width: 200px;
+            height: 400px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 0;
+            transition: transform 0.18s, box-shadow 0.18s;
+            border: 2px solid #e9ecef;
+        }
+        .about-team-member:hover {
+            transform: translateY(-8px) scale(1.04);
+            box-shadow: 0 8px 32px rgba(10,35,66,0.18);
+        }
+        .about-team-member img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+            z-index: 1;
+        }
+        .about-team-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10,35,66,0.6);
+            color: #ffe082;
+            padding: 32px 12px 18px 12px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 0 0 18px 18px;
+        }
+        .about-team-overlay .team-name,
+        .about-team-overlay .team-email,
+        .about-team-overlay .team-contact {
+            font-weight: bold;
+            color: #ffe082;
+            text-shadow: 0 2px 8px rgba(10,35,66,0.18);
+            margin-bottom: 6px;
+        }
+        .about-team-overlay .team-name {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+        .about-team-overlay .team-email,
+        .about-team-overlay .team-contact {
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+        @media (max-width: 1000px) {
+            .about-team-section {
+                gap: 6px;
+                padding: 32px 12px 24px 12px;
+            }
+            .about-team-member {
+                width: calc((100vw - 48px - 18px) / 4);
+                min-width: 180px;
+                height: 360px;
+            }
+        }
+        @media (max-width: 900px) {
+            .about-fss-container {
+                flex-direction: column;
+                gap: 18px;
+                border-radius: 0;
+            }
+            .about-fss-image img {
+                max-width: 98vw;
+            }
+            .about-fss-text, .about-fss-image {
+               padding-left: 8vw;
+               padding-right: 8vw;
+            }
+        }
+        @media (max-width: 700px) {
+            .about-fss-container {
+                flex-direction: column;
+            }
+            .about-card {
+                padding: 30px 20px;
+            }
+            .image-card {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            .text-card {
+                border-left: none;
+                border-top: 1px solid #e9ecef;
+            }
+            .about-team-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+                padding: 32px 16px 24px 16px;
+            }
+            .about-team-member {
+                width: 90vw;
+                max-width: 350px;
+                min-width: auto;
+                height: 280px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .about-team-section {
+                gap: 12px;
+                padding: 24px 12px 16px 12px;
+            }
+            .about-team-member {
+                width: 95vw;
+                max-width: 320px;
+                height: 260px;
+            }
+            .about-team-overlay {
+                padding: 24px 8px 12px 8px;
+            }
+            .about-team-overlay .team-name {
+                font-size: 1.1rem;
+            }
+            .about-team-overlay .team-contact {
+                font-size: 0.95rem;
+            }
+        }
+      .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #25d366;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+      }
+      
+      .whatsapp-float:hover {
+        background-color: #128c7e;
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      }
+      
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .whatsapp-float {
+          width: 50px;
+          height: 50px;
+          bottom: 20px;
+          right: 20px;
+          font-size: 25px;
+        }
+        
+        .about-banner-img {
+          height: 30vh;
+        }
+        
+        .about-bar {
+          font-size: 1.6rem;
+          padding: 20px 0 15px 0;
+        }
+        
+        .about-fss-container {
+          flex-direction: column;
+          gap: 0;
+        }
+        
+        .about-card {
+          padding: 30px 20px;
+        }
+        
+        .about-fss-container h1 {
+          font-size: 1.8rem;
+          margin-bottom: 15px;
+        }
+        
+        .about-fss-container p {
+          font-size: 1rem;
+          line-height: 1.6;
+        }
+        
+        .about-fss-image img {
+          height: 200px;
+        }
+        
+        .about-team-section {
+          flex-direction: column;
+          gap: 20px;
+          padding: 20px 3%;
+        }
+        
+        .about-team-member {
+          width: 100%;
+          max-width: 300px;
+        }
+        
+        .about-team-bar {
+          font-size: 1.6rem;
+          padding: 20px 0 15px 0;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .about-banner-img {
+          height: 25vh;
+        }
+        
+        .about-bar,
+        .about-team-bar {
+          font-size: 1.4rem;
+          padding: 15px 0 10px 0;
+        }
+        
+        .about-card {
+          padding: 25px 15px;
+        }
+        
+        .about-fss-container h1 {
+          font-size: 1.5rem;
+        }
+        
+        .about-fss-container p {
+          font-size: 0.95rem;
+        }
+        
+        .about-fss-image img {
+          height: 150px;
+        }
+        
+        .about-team-member {
+          max-width: 250px;
+        }
+      }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <img src="{% static 'images/homepage5.jpg' %}" alt="About Banner" class="about-banner-img">
+    <div class="about-bar">WHO WE ARE</div>
+    <div class="about-fss-container">
+      <div class="about-card image-card">
+        <div class="about-fss-image">
+          <img src="{% static 'images/about1.jpg' %}" alt="About FSS">
+        </div>
+      </div>
+      <div class="about-card text-card">
+        <div class="about-fss-text">
+          <h1>Bluehawks Security and Management Pvt. Ltd</h1>
+          <p>
+            Bluehawks Security and Management Pvt. Ltd. is a distinguished name in Pakistan's private security industry. Established in 2007, the company was founded with the vision of providing professional, dependable, and high-standard security services. Over the years, Bluehawks has built a solid reputation for delivering well-trained and disciplined security personnel to national and multinational organizations across both public and private sectors. With nearly two decades of operational experience, the company has steadily evolved and diversified its services to meet the dynamic security needs of its clients in an ever-changing environment.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="about-bar">OUR CEO MESSAGE</div>
+    <div class="about-fss-container">
+      <div class="about-card text-card" style="flex: 2;">
+        <div class="about-fss-text">
+          <h1>Bluehawks Security and Management Pvt. Ltd</h1>
+          <p>
+            Bluehawks Security and Management Pvt. Ltd. is a trusted name in Pakistan's private security sector. Established in 2007, the company was founded with a vision to provide professional security services and create meaningful employment opportunities for skilled individuals, including retired armed forces personnel. Over the years, Bluehawks has earned a solid reputation for delivering well-trained, disciplined, and dependable security solutions to national and multinational organizations across both public and private sectors. With nearly two decades of operational experience, Bluehawks has steadily matured and expanded its services to meet the evolving security needs of its diverse clientele.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="about-team-bar">Our Team</div>
+    <div class="about-team-section">
+      <div class="about-team-member">
+        <img src="{% static 'images/contact__1.jpeg' %}" alt="Team Member 1">
+        <div class="about-team-overlay">
+          <div class="team-name">Syed Mustajab Shah</div>
+          <div class="team-contact">General Manager</div>
+        </div>
+      </div>
+      <div class="about-team-member">
+        <img src="{% static 'images/contact_2.jpg' %}" alt="Team Member 2">
+        <div class="about-team-overlay">
+          <div class="team-name">Malik Tanveer</div>
+          <div class="team-contact">Senior Supervisor</div>
+        </div>
+      </div>
+      <div class="about-team-member">
+        <img src="{% static 'images/contact_3.jpg' %}" alt="Team Member 3">
+        <div class="about-team-overlay">
+          <div class="team-name">Altaf Khan</div>
+          <div class="team-contact">Manager Operations & HR</div>
+        </div>
+      </div>
+      <div class="about-team-member">
+        <img src="{% static 'images/contact_4.jpeg' %}" alt="Team Member 4">
+        <div class="about-team-overlay">
+          <div class="team-name">Malik Karamat</div>
+          <div class="team-contact">Chief Security Officer</div>
+        </div>
+      </div>
+      
+    </div>
+{% endblock %} 

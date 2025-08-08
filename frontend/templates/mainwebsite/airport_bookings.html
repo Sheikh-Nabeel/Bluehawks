@@ -1,0 +1,803 @@
+{% extends 'mainwebsite/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        body {
+            padding-top: 70px;
+        }
+        
+        /* Banner Section */
+        .banner-section {
+            width: 100%;
+            position: relative;
+        }
+        
+        .banner-image {
+            width: 100%;
+            height: 40vh;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        
+        .header-bar {
+            background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+            color: #ffe082;
+            text-align: center;
+            padding: 28px 0 20px 0;
+            font-size: 2.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px rgba(10,35,66,0.10);
+        }
+        
+        /* Service Cards Section */
+        .services-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 60px 0;
+            width: 100%;
+        }
+        
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .service-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(10,35,66,0.15);
+        }
+        
+        .service-card i {
+            font-size: 3rem;
+            color: #185a9d;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover i {
+            transform: scale(1.1);
+            color: #0a2342;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .banner-image {
+                height: 30vh;
+            }
+            
+            .header-bar {
+                font-size: 1.6rem;
+                padding: 20px 0 15px 0;
+            }
+            
+            .services-section {
+                padding: 30px 3%;
+            }
+            
+            .services-container {
+                padding: 0 15px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .service-card {
+                padding: 20px 15px;
+            }
+            
+            .service-card i {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .service-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .service-card p {
+                font-size: 0.9rem;
+            }
+            
+            .airports-section {
+                padding: 30px 3%;
+            }
+            
+            .airports-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .airport-card {
+                padding: 20px 15px;
+            }
+            
+            .airport-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .airport-card p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .banner-image {
+                height: 25vh;
+            }
+            
+            .header-bar {
+                font-size: 1.4rem;
+                padding: 15px 0 10px 0;
+            }
+            
+            .services-section,
+            .airports-section {
+                padding: 20px 2%;
+            }
+            
+            .services-grid,
+            .airports-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .service-card,
+            .airport-card {
+                padding: 15px 12px;
+            }
+            
+            .service-card i {
+                font-size: 2rem;
+                margin-bottom: 12px;
+            }
+            
+            .service-card h3,
+            .airport-card h3 {
+                font-size: 1rem;
+            }
+            
+            .service-card p,
+            .airport-card p {
+                font-size: 0.85rem;
+            }
+        }
+        
+        .service-card h3 {
+            color: #0a2342;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* Airports Section */
+        .airports-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 60px 0;
+            width: 100%;
+        }
+        
+        .airports-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            color: #0a2342;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+        
+        .airports-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .airport-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .airport-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+        }
+        
+        .airport-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(10,35,66,0.15);
+            border-color: #185a9d;
+        }
+        
+        .airport-card i {
+            font-size: 3.5rem;
+            color: #185a9d;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .airport-card:hover i {
+            transform: scale(1.1);
+            color: #0a2342;
+        }
+        
+        .airport-card h4 {
+            color: #0a2342;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .airport-card p {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #185a9d 0%, #0a2342 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Booking Form Section */
+        .booking-section {
+            background: #ffffff;
+            padding: 60px 0;
+            width: 100%;
+        }
+        
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .booking-form {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .booking-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+        }
+        
+        .form-title {
+            color: #0a2342;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .form-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            transition: all 0.3s ease;
+            background: #ffffff;
+            color: #333;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #185a9d;
+            box-shadow: 0 0 0 4px rgba(24,90,157,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .form-group label {
+            position: absolute;
+            left: 20px;
+            top: 16px;
+            color: #666;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            background: #ffffff;
+            padding: 0 4px;
+        }
+        
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group select:focus + label,
+        .form-group select:not([value=""]) + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -8px;
+            font-size: 0.85rem;
+            color: #185a9d;
+            font-weight: 700;
+        }
+        
+        .form-error {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #0a2342 0%, #185a9d 50%, #0a2342 100%);
+            color: #ffffff;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Montserrat', Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(10,35,66,0.3);
+        }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128c7e;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .airports-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .airports-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .booking-form {
+                padding: 30px 20px;
+            }
+            
+            .form-title {
+                font-size: 1.6rem;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .airports-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .service-card,
+            .airport-card {
+                padding: 25px 20px;
+            }
+            
+            .booking-form {
+                padding: 25px 15px;
+            }
+            
+            .form-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    
+    <!-- Banner Section -->
+    <div class="banner-section">
+        <img src="{% static 'images/homepage5.jpg' %}" alt="Airport Services Banner" class="banner-image">
+        <div class="header-bar">AIRPORT BOOKINGS & TRANSPORTATION</div>
+    </div>
+    
+    <!-- Services Section -->
+    <div class="services-section">
+        <div class="services-container">
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-plane-arrival"></i>
+                    <h3>Airport Pickup</h3>
+                    <p>Professional pickup service from all major airports in Pakistan. Our security-trained drivers ensure safe and timely arrival.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-plane-departure"></i>
+                    <h3>Airport Drop-off</h3>
+                    <p>Reliable drop-off service to airports with advance scheduling. We ensure you reach your flight on time.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Security Escort</h3>
+                    <p>Enhanced security with trained personnel for VIP clients and high-value cargo transportation.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>24/7 Service</h3>
+                    <p>Round-the-clock availability for all your airport transportation needs, including emergency services.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Airports Section -->
+    <div class="airports-section">
+        <div class="airports-container">
+            <h2 class="section-title">Major Airports We Serve</h2>
+            <div class="airports-grid">
+                <div class="airport-card">
+                    <i class="fas fa-plane"></i>
+                    <h4>Islamabad International Airport</h4>
+                    <p>ISB - Capital City</p>
+                </div>
+                <div class="airport-card">
+                    <i class="fas fa-plane"></i>
+                    <h4>Jinnah International Airport</h4>
+                    <p>KHI - Karachi</p>
+                </div>
+                <div class="airport-card">
+                    <i class="fas fa-plane"></i>
+                    <h4>Allama Iqbal International Airport</h4>
+                    <p>LHE - Lahore</p>
+                </div>
+                <div class="airport-card">
+                    <i class="fas fa-plane"></i>
+                    <h4>Faisalabad International Airport</h4>
+                    <p>LYP - Faisalabad</p>
+                </div>
+                <div class="airport-card">
+                    <i class="fas fa-plane"></i>
+                    <h4>Multan International Airport</h4>
+                    <p>MUX - Multan</p>
+                </div>
+                <div class="airport-card">
+                    <i class="fas fa-plane"></i>
+                    <h4>Quetta International Airport</h4>
+                    <p>UET - Quetta</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Booking Form Section -->
+    <div class="booking-section">
+        <div class="booking-container">
+            <form class="booking-form" id="airportBookingForm" method="POST" novalidate>
+                {% csrf_token %}
+                <h2 class="form-title">Book Your Airport Transportation</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder=" " required>
+                        <label for="name">Full Name *</label>
+                        <div class="form-error" id="error-name"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder=" " required>
+                        <label for="email">Email Address *</label>
+                        <div class="form-error" id="error-email"></div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder=" " required>
+                        <label for="phone">Phone Number *</label>
+                        <div class="form-error" id="error-phone"></div>
+                    </div>
+                    <div class="form-group">
+                        <select id="passengers" name="passengers">
+                            <option value="1">1 Passenger</option>
+                            <option value="2">2 Passengers</option>
+                            <option value="3">3 Passengers</option>
+                            <option value="4">4 Passengers</option>
+                            <option value="5+">5+ Passengers</option>
+                        </select>
+                        <label for="passengers">Number of Passengers</label>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <select id="pickup_airport" name="pickup_airport" required>
+                            <option value="">Select Airport</option>
+                            <option value="Islamabad International Airport">Islamabad International Airport (ISB)</option>
+                            <option value="Jinnah International Airport">Jinnah International Airport (KHI)</option>
+                            <option value="Allama Iqbal International Airport">Allama Iqbal International Airport (LHE)</option>
+                            <option value="Faisalabad International Airport">Faisalabad International Airport (LYP)</option>
+                            <option value="Multan International Airport">Multan International Airport (MUX)</option>
+                            <option value="Quetta International Airport">Quetta International Airport (UET)</option>
+                            <option value="Other">Other Airport</option>
+                        </select>
+                        <label for="pickup_airport">Pickup Airport *</label>
+                        <div class="form-error" id="error-pickup-airport"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="destination" name="destination" placeholder="Enter destination address" required>
+                        <label for="destination">Destination *</label>
+                        <div class="form-error" id="error-destination"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="date" id="travel_date" name="travel_date" required>
+                    <label for="travel_date">Travel Date *</label>
+                    <div class="form-error" id="error-travel-date"></div>
+                </div>
+                
+                <div class="form-group">
+                    <textarea id="message" name="message" rows="4" placeholder="Any special requirements, flight details, or additional information..."></textarea>
+                    <label for="message">Additional Requirements</label>
+                </div>
+                
+                <button type="submit" class="submit-btn">BOOK AIRPORT TRANSPORTATION</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('airportBookingForm').addEventListener('submit', function(e) {
+            let valid = true;
+            
+            // Name validation
+            const name = document.getElementById('name');
+            const errorName = document.getElementById('error-name');
+            if (!name.value.trim()) {
+                errorName.textContent = 'Name is required.';
+                valid = false;
+            } else {
+                errorName.textContent = '';
+            }
+            
+            // Email validation
+            const email = document.getElementById('email');
+            const errorEmail = document.getElementById('error-email');
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.value.trim()) {
+                errorEmail.textContent = 'Email is required.';
+                valid = false;
+            } else if (!emailPattern.test(email.value.trim())) {
+                errorEmail.textContent = 'Enter a valid email address.';
+                valid = false;
+            } else {
+                errorEmail.textContent = '';
+            }
+            
+            // Phone validation
+            const phone = document.getElementById('phone');
+            const errorPhone = document.getElementById('error-phone');
+            if (!phone.value.trim()) {
+                errorPhone.textContent = 'Phone number is required.';
+                valid = false;
+            } else if (!/^\+?\d{7,15}$/.test(phone.value.trim().replace(/\s+/g, ''))) {
+                errorPhone.textContent = 'Enter a valid phone number.';
+                valid = false;
+            } else {
+                errorPhone.textContent = '';
+            }
+            
+            // Pickup Airport validation
+            const pickupAirport = document.getElementById('pickup_airport');
+            const errorPickupAirport = document.getElementById('error-pickup-airport');
+            if (!pickupAirport.value.trim()) {
+                errorPickupAirport.textContent = 'Please select an airport.';
+                valid = false;
+            } else {
+                errorPickupAirport.textContent = '';
+            }
+            
+            // Destination validation
+            const destination = document.getElementById('destination');
+            const errorDestination = document.getElementById('error-destination');
+            if (!destination.value.trim()) {
+                errorDestination.textContent = 'Destination is required.';
+                valid = false;
+            } else {
+                errorDestination.textContent = '';
+            }
+            
+            // Travel Date validation
+            const travelDate = document.getElementById('travel_date');
+            const errorTravelDate = document.getElementById('error-travel-date');
+            if (!travelDate.value.trim()) {
+                errorTravelDate.textContent = 'Travel date is required.';
+                valid = false;
+            } else {
+                const selectedDate = new Date(travelDate.value);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                if (selectedDate < today) {
+                    errorTravelDate.textContent = 'Travel date cannot be in the past.';
+                    valid = false;
+                } else {
+                    errorTravelDate.textContent = '';
+                }
+            }
+            
+            if (!valid) {
+                e.preventDefault();
+                return false;
+            }
+            // Form is valid, allow it to submit
+        });
+    </script>
+{% endblock %} 

@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>{% if meta_title %}{{ meta_title }}{% else %}Bluehawks Security Services - Professional Security Solutions in Pakistan{% endif %}</title>
+    <meta name="description" content="{% if meta_description %}{{ meta_description }}{% else %}Bluehawks Security Services provides professional security solutions, airport transportation, and security training in Pakistan. Contact us for reliable security services.{% endif %}">
+    <meta name="keywords" content="{% if meta_keywords %}{{ meta_keywords }}{% else %}security services, airport transportation, security training, Pakistan, Bluehawks{% endif %}">
+    <meta name="author" content="Bluehawks Security Services">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% if meta_title %}{{ meta_title }}{% else %}Bluehawks Security Services{% endif %}">
+    <meta property="og:description" content="{% if meta_description %}{{ meta_description }}{% else %}Professional security solutions and airport transportation services in Pakistan{% endif %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="{% static 'images/bluehawks-logo.png' %}">
+    <meta property="og:site_name" content="Bluehawks Security Services">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% if meta_title %}{{ meta_title }}{% else %}Bluehawks Security Services{% endif %}">
+    <meta name="twitter:description" content="{% if meta_description %}{{ meta_description }}{% else %}Professional security solutions and airport transportation services in Pakistan{% endif %}">
+    <meta name="twitter:image" content="{% static 'images/bluehawks-logo.png' %}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        {% include 'mainwebsite/header.html' %}
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        {% include 'mainwebsite/footer.html' %}
+    </footer>
+    
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/923253566677?text=Good day! I would like to inquire about your security services. Could you please provide information about the types of security solutions you offer?" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <!-- JavaScript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

@@ -1,0 +1,236 @@
+{% extends 'mainwebsite/base.html' %}
+{% load static %}
+
+{% block content %}
+<article class="service-detail">
+    <header class="service-header">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'services' %}">Services</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ service.name }}</li>
+                </ol>
+            </nav>
+            
+            <h1>{{ service.name }}</h1>
+            {% if service.icon %}
+            <div class="service-icon">
+                <i class="{{ service.icon }}"></i>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <section class="service-content">
+        <div class="container">
+            <div class="service-grid">
+                <div class="service-main">
+                    {% if service.image %}
+                    <figure class="service-image">
+                        <img src="{% static service.image %}" alt="{{ service.name }} - Bluehawks Security Services" loading="lazy">
+                    </figure>
+                    {% endif %}
+                    
+                    <div class="service-description">
+                        <h2>About {{ service.name }}</h2>
+                        <p>{{ service.description|linebreaks }}</p>
+                    </div>
+                </div>
+                
+                <aside class="service-sidebar">
+                    <div class="service-info">
+                        <h3>Service Details</h3>
+                        <ul>
+                            <li><strong>Service Type:</strong> {{ service.name }}</li>
+                            <li><strong>Availability:</strong> 24/7</li>
+                            <li><strong>Coverage:</strong> Pakistan-wide</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cta-section">
+                        <h3>Get Started</h3>
+                        <p>Ready to secure your {{ service.name|lower }} needs?</p>
+                        <a href="{% url 'contact' %}" class="btn btn-primary">Contact Us</a>
+                        <a href="https://wa.me/923253566677?text=I'm interested in your {{ service.name|lower }} service. Could you provide more information?" class="btn btn-whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+</article>
+
+<style>
+.service-detail {
+    padding-top: 70px;
+}
+
+.service-header {
+    background: linear-gradient(135deg, #0a2342 0%, #185a9d 100%);
+    color: #ffffff;
+    padding: 60px 0 40px;
+    text-align: center;
+}
+
+.service-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 20px 0;
+    color: #ffe082;
+}
+
+.service-icon {
+    font-size: 4rem;
+    color: #ffe082;
+    margin: 20px 0;
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.breadcrumb-item a {
+    color: #ffe082;
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: #ffffff;
+}
+
+.service-content {
+    padding: 60px 0;
+    background: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.service-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.service-description h2 {
+    color: #0a2342;
+    font-size: 1.8rem;
+    margin: 30px 0 20px;
+}
+
+.service-description p {
+    color: #666;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.service-sidebar {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.service-info h3 {
+    color: #0a2342;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.service-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.service-info li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+    color: #666;
+}
+
+.service-info li:last-child {
+    border-bottom: none;
+}
+
+.cta-section {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #e9ecef;
+}
+
+.cta-section h3 {
+    color: #0a2342;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #0a2342 0%, #185a9d 100%);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(10,35,66,0.3);
+}
+
+.btn-whatsapp {
+    background: #25d366;
+    color: #ffffff;
+}
+
+.btn-whatsapp:hover {
+    background: #128c7e;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .service-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .service-header h1 {
+        font-size: 2rem;
+    }
+    
+    .service-icon {
+        font-size: 3rem;
+    }
+    
+    .service-content {
+        padding: 40px 0;
+    }
+}
+</style>
+{% endblock %} 

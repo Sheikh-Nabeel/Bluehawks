@@ -1,0 +1,454 @@
+{% extends 'mainwebsite/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #ffffff;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .services-banner-img {
+      width: 100%;
+      height: 40vh;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      box-shadow: 0 8px 32px 0 rgba(10,35,66,0.18);
+    }
+
+    .services-title-bar {
+      width: 100%;
+      background: linear-gradient(90deg, #004080 0%, #0072c6 100%);
+      color: #ffffff;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      padding: 28px 0 20px;
+      margin-bottom: 3px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .major-services-section {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px 0;
+      background: #ffffff;
+      padding: 48px 0;
+    }
+
+    .major-service-card {
+      width: 48vw;
+      max-width: 520px;
+      min-width: 280px;
+      background: #f9f9f9;
+      border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+      margin: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #ddd;
+    }
+
+    .major-service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      .services-banner-img {
+        height: 30vh;
+      }
+      
+      .services-title-bar {
+        font-size: 1.6rem;
+        padding: 20px 0 15px 0;
+      }
+      
+      .major-services-section {
+        padding: 30px 3%;
+        gap: 20px 0;
+      }
+      
+      .major-service-card {
+        width: 100%;
+        max-width: 100%;
+        margin: 10px 0;
+      }
+      
+      .major-service-img {
+        height: 180px;
+      }
+      
+      .major-service-content {
+        padding: 20px 15px 15px;
+      }
+      
+      .major-service-title {
+        font-size: 1.2rem;
+      }
+      
+      .major-service-desc {
+        font-size: 0.95rem;
+      }
+      
+      .guarding-list-card {
+        padding: 15px;
+      }
+      
+      .guarding-list-card-title {
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .services-banner-img {
+        height: 25vh;
+      }
+      
+      .services-title-bar {
+        font-size: 1.4rem;
+        padding: 15px 0 10px 0;
+      }
+      
+      .major-services-section {
+        padding: 20px 2%;
+        gap: 15px 0;
+      }
+      
+      .major-service-card {
+        margin: 8px 0;
+      }
+      
+      .major-service-img {
+        height: 150px;
+      }
+      
+      .major-service-content {
+        padding: 15px 12px 12px;
+      }
+      
+      .major-service-title {
+        font-size: 1.1rem;
+      }
+      
+      .major-service-desc {
+        font-size: 0.9rem;
+      }
+    }
+
+    .major-service-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      background: #eaeaea;
+      border-bottom: 2px solid #0072c6;
+    }
+
+    .major-service-content {
+      padding: 28px 22px 22px;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .major-service-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #004080;
+      margin-bottom: 12px;
+    }
+
+    .major-service-desc {
+      font-size: 1.05rem;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .guarding-list-card {
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      padding: 18px;
+      color: #333;
+    }
+
+    .guarding-list-card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #004080;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .guarding-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+
+    .guarding-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .guarding-list li span:first-child {
+      color: #0072c6;
+      font-size: 1.2em;
+    }
+
+    .book-service-btn {
+      background: linear-gradient(135deg, #004080 0%, #0072c6 100%);
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      margin-top: 16px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .book-service-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 112, 198, 0.3);
+      background: linear-gradient(135deg, #0072c6 0%, #004080 100%);
+    }
+
+    /* WhatsApp Float Button */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 40px;
+      right: 40px;
+      background-color: #25d366;
+      color: #FFF;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 3px #999;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+      background-color: #128c7e;
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+      }
+    }
+
+    /* Full-width footer container */
+    .footer-container {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    @media (max-width: 900px) {
+      .major-services-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .major-service-card {
+        width: 94vw;
+        max-width: 98vw;
+      }
+
+      .major-service-img {
+        height: 200px;
+      }
+
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 25px;
+      }
+    }
+      </style>
+{% endblock %}
+
+{% block content %}
+
+  <img src="{% static 'images/homepage5.jpg' %}" alt="Services Banner" class="services-banner-img">
+  <div class="services-title-bar">OUR SERVICES</div>
+
+  <div class="major-services-section">
+    <!-- GUARDING SERVICES CARD -->
+    <div class="major-service-card">
+      <img src="{% static 'images/garding-services.jpg' %}" alt="Guarding Services" class="major-service-img">
+      <div class="major-service-content">
+        <div class="major-service-title">GUARDING SERVICES</div>
+        <div class="major-service-desc">
+          Dependable and disciplined personnel to secure your premises, staff, and operations—available for residential, corporate, and high-risk environments.
+        </div>
+        <div class="guarding-list-card">
+          <div class="guarding-list-card-title">We provide highly trained security personnel tailored to your unique protection needs:</div>
+          <ul class="guarding-list">
+            <li><span>&#9679;</span> <span>Elite Ex-SSG Commandos for critical and high-risk sites</span></li>
+            <li><span>&#9679;</span> <span>Professionally trained guards from military and civilian backgrounds</span></li>
+            <li><span>&#9679;</span> <span>Unarmed guards for routine monitoring and access control</span></li>
+            <li><span>&#9679;</span> <span>Trained female security staff for screening and sensitive roles</span></li>
+            <li><span>&#9679;</span> <span>Mobile security escorts and vehicle convoy protection</span></li>
+            <li><span>&#9679;</span> <span>Provision of bulletproof vehicles upon request</span></li>
+            <li><span>&#9679;</span> <span>Close protection officers for executives and VIPs</span></li>
+            <li><span>&#9679;</span> <span>Sniper-trained response teams for extreme threats</span></li>
+            <li><span>&#9679;</span> <span>Security coverage and crowd control for events</span></li>
+          </ul>
+        </div>
+        <a href="{% url 'contact' %}#message" class="book-service-btn">Book Guarding Service</a>
+      </div>
+    </div>
+
+    <!-- TRANSPORT WITH SECURITY SERVICES CARD -->
+    <div class="major-service-card">
+      <img src="{% static 'images/second-card-services.jpg' %}" alt="Secure Transport Services" class="major-service-img">
+      <div class="major-service-content">
+        <div class="major-service-title">SECURE TRANSPORT SERVICES</div>
+        <div class="major-service-desc">
+          Safe, discreet, and fully protected movement of high-value assets, confidential documents, and sensitive materials across Pakistan—delivered with precision and backed by tactical expertise.
+        </div>
+        <div class="guarding-list-card">
+          <div class="guarding-list-card-title">
+            Our secure transport division ensures end-to-end protection of your physical and financial assets using advanced technology, route planning, and professional armed personnel. Our specialized services include:
+          </div>
+          <ul class="guarding-list">
+            <li><span>&#9679;</span> <span>Dedicated armed escort teams trained for high-value, high-risk consignments</span></li>
+            <li><span>&#9679;</span> <span>GPS-enabled armored and standard vehicles with 24/7 real-time route tracking</span></li>
+            <li><span>&#9679;</span> <span>Route planning, reconnaissance, and pre-defined risk assessments to minimize exposure</span></li>
+            <li><span>&#9679;</span> <span>Special handling protocols for sensitive, classified, or fragile materials</span></li>
+            <li><span>&#9679;</span> <span>Secure transport of corporate cash, jewelry, documentation, and legal records</span></li>
+            <li><span>&#9679;</span> <span>Discreet and timely operations with maximum confidentiality and accountability</span></li>
+          </ul>
+        </div>
+        <a href="{% url 'contact' %}#message" class="book-service-btn">Book Transport Service</a>
+      </div>
+    </div>
+
+    <!-- ELECTRONIC SECURITY SYSTEMS CARD -->
+    <div class="major-service-card">
+      <img src="{% static 'images/services-card-3.jpg' %}" alt="Electronic Security Systems" class="major-service-img">
+      <div class="major-service-content">
+        <div class="major-service-title">ELECTRONIC SECURITY SYSTEMS</div>
+        <div class="major-service-desc">
+          Advanced surveillance and automation systems that help you monitor, prevent, and respond to security breaches in real-time.
+        </div>
+        <div class="guarding-list-card">
+          <div class="guarding-list-card-title">
+            Our solutions are designed to enhance security through intelligent automation and 24/7 vigilance:
+            <ul class="guarding-list">
+              <li><span>&#9679;</span> <span>HD CCTV cameras with remote access and cloud backup</span></li>
+              <li><span>&#9679;</span> <span>Motion detectors and smart intrusion alarms</span></li>
+              <li><span>&#9679;</span> <span>Biometric and RFID access control systems</span></li>
+              <li><span>&#9679;</span> <span>Control room setup and centralized monitoring</span></li>
+              <li><span>&#9679;</span> <span>Integrated alert and notification systems</span></li>
+            </ul>
+          </div>
+        </div>
+        <a href="{% url 'contact' %}#message" class="book-service-btn">Book Security System</a>
+      </div>
+    </div>
+
+    <!-- CONSULTANCY & TRAINING CARD -->
+    <div class="major-service-card">
+      <img src="{% static 'images/service-card-4.jpg' %}" alt="Consultancy & Training" class="major-service-img">
+      <div class="major-service-content">
+        <div class="major-service-title">CONSULTANCY & TRAINING</div>
+        <div class="major-service-desc">
+          Expert guidance and hands-on training programs that empower your team to manage risks, respond to emergencies, and maintain safety standards.
+        </div>
+        <div class="guarding-list-card">
+          <div class="guarding-list-card-title">
+            We help organizations build strong internal security protocols through:
+            <ul class="guarding-list">
+              <li><span>&#9679;</span> <span>Security risk assessments and compliance audits</span></li>
+              <li><span>&#9679;</span> <span>On-site safety drills and emergency simulations</span></li>
+              <li><span>&#9679;</span> <span>Conflict resolution and incident response training</span></li>
+              <li><span>&#9679;</span> <span>Surveillance and patrolling strategies</span></li>
+              <li><span>&#9679;</span> <span>Corporate training on threat awareness and reporting</span></li>
+            </ul>
+          </div>
+        </div>
+        <a href="{% url 'contact' %}#message" class="book-service-btn">Book Training Service</a>
+      </div>
+    </div>
+
+    <!-- AIRPORT BOOKINGS & TRANSPORTATION CARD -->
+    <div class="major-service-card">
+      <img src="{% static 'images/26.jpg' %}" alt="Airport Bookings & Transportation" class="major-service-img">
+      <div class="major-service-content">
+        <div class="major-service-title">AIRPORT BOOKINGS & TRANSPORTATION</div>
+        <div class="major-service-desc">
+          Professional airport pickup and drop-off services across all major airports in Pakistan. Our security-trained drivers ensure safe, timely, and reliable transportation for your travel needs.
+        </div>
+        <div class="guarding-list-card">
+          <div class="guarding-list-card-title">
+            Our comprehensive airport transportation services include:
+            <ul class="guarding-list">
+              <li><span>&#9679;</span> <span>Professional airport pickup service from all major airports in Pakistan</span></li>
+              <li><span>&#9679;</span> <span>Reliable drop-off service to airports with advance scheduling</span></li>
+              <li><span>&#9679;</span> <span>Enhanced security with trained personnel for VIP clients</span></li>
+              <li><span>&#9679;</span> <span>24/7 round-the-clock availability including emergency services</span></li>
+              <li><span>&#9679;</span> <span>High-value cargo transportation with security escort</span></li>
+              <li><span>&#9679;</span> <span>Coverage of all major airports: ISB, KHI, LHE, LYP, MUX, UET</span></li>
+              <li><span>&#9679;</span> <span>Security-trained drivers ensuring safe and timely arrival</span></li>
+              <li><span>&#9679;</span> <span>Advance booking system with flexible scheduling options</span></li>
+            </ul>
+          </div>
+        </div>
+        <a href="{% url 'airport_bookings' %}" class="book-service-btn">Book Airport Transport</a>
+      </div>
+    </div>
+  </div>
+
+  </div>
+{% endblock %}
