@@ -13,10 +13,10 @@ DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY', 'Bluehawks@85410685')
 
 # Update allowed hosts for production
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,mystick.online,www.mystick.online').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,mystick.online,www.mystick.online,bluehawkssecurities.com,www.bluehawkssecurities.com').split(',')
 
 # CSRF Trusted Origins
-CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://bluehawks.onrender.com').split(',')
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://bluehawks.onrender.com,https://bluehawkssecurities.com,https://www.bluehawkssecurities.com').split(',')
 
 # Time Zone and Language
 TIME_ZONE = os.environ.get('TIME_ZONE', 'Asia/Karachi')

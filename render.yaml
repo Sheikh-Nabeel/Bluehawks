@@ -22,7 +22,7 @@ services:
           name: bluehawks-db
           property: connectionString
       - key: ALLOWED_HOSTS
-        value: .onrender.com,mystick.online,www.mystick.online
+        value: .onrender.com,mystick.online,www.mystick.online,bluehawkssecurities.com,www.bluehawkssecurities.com
       - key: DEBUG
         value: false
       - key: DJANGO_SETTINGS_MODULE
@@ -32,7 +32,7 @@ services:
       - key: LANGUAGE_CODE
         value: en-us
       - key: CSRF_TRUSTED_ORIGINS
-        value: https://bluehawks.onrender.com
+        value: https://bluehawks.onrender.com,https://bluehawkssecurities.com,https://www.bluehawkssecurities.com
       - key: EMAIL_HOST
         value: smtp.gmail.com
       - key: EMAIL_PORT
