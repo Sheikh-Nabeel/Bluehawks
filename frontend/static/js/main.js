@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Performance optimization: Preload critical resources
 function preloadCriticalResources() {
     const criticalImages = [
-        '/static/images/homepage-banner.jpg',
-        '/static/images/bluehawks-logo.png'
+        '/static/images/homepage1.jpg',
+        '/static/images/Logo.png'
     ];
     
     criticalImages.forEach(src => {
