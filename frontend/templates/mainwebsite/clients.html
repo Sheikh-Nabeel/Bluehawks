@@ -8,20 +8,36 @@
     html, body {
       margin: 0;
       padding: 0;
-      width: 100vw;
+      width: 100%;
+      max-width: 100%;
       box-sizing: border-box;
       background: #ffffff;
       font-family: 'Montserrat', Arial, sans-serif;
       color: #333;
+      overflow-x: hidden;
     }
 
     body {
-      width: 100vw;
+      width: 100%;
+      max-width: 100%;
       overflow-x: hidden;
       background: #ffffff;
       margin-top: 0;
       padding-top: 75px;
       scroll-behavior: smooth;
+    }
+    
+    /* Mobile body adjustments */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 65px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding-top: 60px;
+      }
     }
     
     /* Prevent auto-scroll on refresh */
@@ -30,7 +46,7 @@
     }
 
     .clients-title-bar {
-      width: 100vw;
+      width: 100%;
       background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
       color: #ffe082;
       text-align: center;
@@ -41,6 +57,7 @@
       margin-bottom: 3px;
       border-radius: 0;
       box-shadow: 0 2px 12px rgba(10,35,66,0.10);
+      box-sizing: border-box;
     }
 
     .animated-text {
@@ -63,87 +80,269 @@
     }
 
     .clients-gallery-section {
-      width: 100vw;
+      width: 100%;
       background: #ffffff;
-      padding: 48px 0;
+      padding: 60px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      box-sizing: border-box;
     }
 
     .clients-gallery-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      width: 90vw;
-      max-width: 1200px;
+      gap: 40px;
+      width: 100%;
+      max-width: 1400px;
       margin: 0 auto;
       justify-items: center;
+      box-sizing: border-box;
     }
 
-    @media (max-width: 1000px) {
+    /* Large Desktop Screens */
+    @media (min-width: 1400px) {
+      .clients-gallery-section {
+        padding: 80px 40px;
+      }
       .clients-gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(5, 1fr);
+        gap: 50px;
+        max-width: 1600px;
+      }
+      .client-card {
+        max-width: 320px;
+        border-radius: 16px;
+      }
+      .clients-title-bar {
+        font-size: 2.5rem;
+        padding: 35px 0 25px 0;
       }
     }
-
-    @media (max-width: 600px) {
+    
+    /* Desktop Landscape */
+    @media (min-width: 1024px) and (max-width: 1399px) {
+      .clients-gallery-section {
+        padding: 70px 30px;
+      }
       .clients-gallery-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+      }
+      .client-card {
+        max-width: 300px;
+      }
+    }
+    
+    /* Tablet Portrait */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .clients-gallery-section {
+        padding: 50px 25px;
+      }
+      .clients-gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+      .client-card {
+        max-width: 250px;
+        min-width: 180px;
+      }
+      .clients-title-bar {
+        font-size: 1.9rem;
+        padding: 25px 0 18px 0;
+      }
+    }
+    
+    /* Large Mobile */
+    @media (max-width: 767px) {
+      .clients-gallery-section {
+        padding: 40px 20px;
+      }
+      .clients-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .client-card {
+        max-width: 200px;
+        min-width: 150px;
+        border-radius: 10px;
+      }
+      .client-img {
+        width: 75%;
+        height: 75%;
+        padding: 15px;
+      }
+      .clients-title-bar {
+        font-size: 1.7rem;
+        padding: 22px 0 16px 0;
+      }
+    }
+    
+    /* Standard Mobile */
+    @media (max-width: 480px) {
+      .clients-gallery-section {
+        padding: 30px 15px;
+      }
+      .clients-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      .client-card {
+        max-width: 160px;
+        min-width: 120px;
+        border-radius: 8px;
+      }
+      .client-img {
+        width: 70%;
+        height: 70%;
+        padding: 12px;
+      }
+      .clients-title-bar {
+        font-size: 1.5rem;
+        padding: 18px 0 12px 0;
+      }
+    }
+    
+    /* Small Mobile */
+    @media (max-width: 360px) {
+      .clients-gallery-section {
+        padding: 25px 12px;
+      }
+      .clients-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .client-card {
+        max-width: 140px;
+        min-width: 100px;
+        border-radius: 6px;
+      }
+      .client-img {
+        width: 65%;
+        height: 65%;
+        padding: 10px;
+      }
+      .clients-title-bar {
+        font-size: 1.3rem;
+        padding: 15px 0 10px 0;
+      }
+    }
+    
+    /* Ultra-wide Screens */
+    @media (min-width: 1920px) {
+      .clients-gallery-section {
+        padding: 100px 60px;
+      }
+      .clients-gallery-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 60px;
+        max-width: 1800px;
+      }
+      .client-card {
+        max-width: 350px;
+        border-radius: 18px;
+      }
+      .clients-title-bar {
+        font-size: 3rem;
+        padding: 40px 0 30px 0;
+      }
+    }
+    
+    /* Landscape Phone Orientation */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .clients-gallery-section {
+        padding: 20px 15px;
+      }
+      .clients-title-bar {
+        padding: 12px 0 8px 0;
+      }
+      .client-card {
+        max-width: 120px;
+        min-width: 80px;
+      }
+    }
+    
+    /* Touch Device Optimizations */
+    @media (pointer: coarse) {
+      .client-card:hover {
+        transform: none;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+      }
+      .client-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s;
+      }
+      .client-card:hover img {
+        transform: none;
+        filter: none;
+      }
+    }
+    
+    /* High DPI Displays */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .client-img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
+    }
+    
+    /* Reduced Motion Preference */
+    @media (prefers-reduced-motion: reduce) {
+      .client-card,
+      .client-card img,
+      .animated-text {
+        transition: none;
+        animation: none;
+      }
+      .animated-text {
+        opacity: 1;
+        transform: none;
       }
     }
 
     .client-card {
-      width: 250px;
-      border-radius: 10px;
+      width: 100%;
+      max-width: 280px;
+      min-width: 200px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
       background-color: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: box-shadow 0.2s;
+      transition: all 0.3s ease;
+      border: 2px solid #f8f9fa;
+      box-sizing: border-box;
+      aspect-ratio: 1;
     }
 
     .client-card:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      box-shadow: 0 12px 32px rgba(10,35,66,0.18);
+      transform: translateY(-4px);
+      border-color: #e9ecef;
     }
 
     .client-card img {
-      transition: transform 0.25s ease, box-shadow 0.2s;
+      transition: transform 0.3s ease, filter 0.3s ease;
     }
 
     .client-card:hover img {
-      transform: scale(1.08);
-      box-shadow: 0 4px 24px rgba(33,150,243,0.2);
+      transform: scale(1.05);
+      filter: brightness(1.1);
     }
 
     .client-img {
-      width: 100%;
-      height: 160px;
+      width: 80%;
+      height: 80%;
       object-fit: contain;
       background: none;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
-    .client-content {
-      padding: 22px 16px 16px 16px;
-      text-align: center;
-    }
 
-    .client-title {
-      font-size: 1.18rem;
-      font-weight: bold;
-      color: #0a2342;
-      margin-bottom: 8px;
-      letter-spacing: 0.5px;
-    }
-
-    .client-desc {
-      font-size: 1.02rem;
-      color: #555;
-      line-height: 1.5;
-    }
     /* WhatsApp Float Button */
     .whatsapp-float {
       position: fixed;
@@ -184,6 +383,7 @@
       }
     }
     
+    /* WhatsApp Float Button Responsive Styles */
     @media (max-width: 768px) {
       .whatsapp-float {
         width: 50px;
@@ -192,53 +392,29 @@
         right: 20px;
         font-size: 25px;
       }
-      
-      .clients-title-bar {
-        font-size: 1.6rem;
-        padding: 20px 0 15px 0;
-      }
-      
-      .clients-gallery-section {
-        padding: 30px 3%;
-      }
-      
-      .clients-gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-      }
-      
-      .client-card {
-        padding: 15px;
-      }
-      
-      .client-img {
-        height: 80px;
-        width: 80px;
+    }
+    
+    @media (max-width: 360px) {
+      .whatsapp-float {
+        width: 45px;
+        height: 45px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 20px;
       }
     }
     
-    @media (max-width: 480px) {
-      .clients-title-bar {
-        font-size: 1.4rem;
-        padding: 15px 0 10px 0;
+    /* Print Styles */
+    @media print {
+      .whatsapp-float {
+        display: none;
       }
-      
       .clients-gallery-section {
-        padding: 20px 2%;
+        page-break-inside: avoid;
       }
-      
-      .clients-gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-      
       .client-card {
-        padding: 12px;
-      }
-      
-      .client-img {
-        height: 60px;
-        width: 60px;
+        box-shadow: none;
+        border: 1px solid #ccc;
       }
     }
       </style>

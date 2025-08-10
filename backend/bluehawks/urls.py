@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 from mainwebsite.views import home, about, services, contact, clients, airport_bookings, service_detail, robots_txt
 from mainwebsite.sitemaps import ServiceSitemap, StaticViewSitemap
@@ -26,6 +26,10 @@ sitemaps = {
 }
 
 urlpatterns = [
+    # API endpoints
+    path('api/', include('mainwebsite.api_urls')),
+    
+    # Web pages
     path('', home, name='home'),
     path('about/', about, name='about'),
     path('services/', services, name='services'),

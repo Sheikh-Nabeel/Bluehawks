@@ -7,41 +7,59 @@
         html, body {
             margin: 0;
             padding: 0;
-            width: 100vw;
-            min-width: 100vw;
+            width: 100%;
+            max-width: 100%;
             box-sizing: border-box;
             background: #ffffff;
             font-family: 'Montserrat', Arial, sans-serif;
+            overflow-x: hidden;
         }
         body {
-            width: 100vw;
-            min-width: 100vw;
+            width: 100%;
+            max-width: 100%;
             overflow-x: hidden;
             background: #ffffff;
+            margin-top: 0;
+            padding-top: 70px;
+        }
+        
+        /* Mobile body adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding-top: 55px;
+            }
         }
         .about-banner-img {
-            width: 100vw;
-            height: 40vh;
+            width: 100%;
+            height: 50vh;
             object-fit: cover;
             object-position: center;
             display: block;
             box-shadow: 0 8px 32px 0 rgba(10,35,66,0.18);
+            min-height: 300px;
         }
-                 .about-bar {
-             width: 100vw;
-             background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
-             color: #ffe082;
-             text-align: center;
-             font-size: 2.1rem;
-             font-weight: 700;
-             padding: 28px 0 20px 0;
-             letter-spacing: 1px;
-             margin-bottom: 3px;
-             border-radius: 0;
-             box-shadow: 0 2px 12px rgba(10,35,66,0.10);
-         }
+        .about-bar {
+            width: 100%;
+            background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+            color: #ffe082;
+            text-align: center;
+            font-size: 2.1rem;
+            font-weight: 700;
+            padding: 28px 0 20px 0;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+            border-radius: 0;
+            box-shadow: 0 2px 12px rgba(10,35,66,0.10);
+            box-sizing: border-box;
+        }
         .about-fss-container {
-            width: 100vw;
+            width: 100%;
             margin: 0;
             background: transparent;
             padding: 0;
@@ -50,6 +68,7 @@
             align-items: stretch;
             gap: 0;
             margin-bottom: 32px;
+            box-sizing: border-box;
         }
         .about-card {
             flex: 1;
@@ -57,11 +76,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 30px;
+            padding: 50px 40px;
             background: linear-gradient(120deg, #ffffff 60%, #f8f9fa 100%);
             border: 2px solid #e9ecef;
             box-shadow: 0 2px 18px rgba(0,0,0,0.10);
             border-radius: 0;
+            box-sizing: border-box;
+            width: 100%;
         }
         .image-card {
             border-right: 1px solid #e9ecef;
@@ -74,6 +95,7 @@
             width: 100%;
             color: #0a2342;
             text-align: center;
+            max-width: 100%;
         }
         .about-fss-image {
             width: 100%;
@@ -81,6 +103,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 400px;
         }
         .about-fss-image img {
             width: 100%;
@@ -95,44 +118,51 @@
             margin-bottom: 20px;
             font-size: 2.1rem;
             letter-spacing: 1px;
+            line-height: 1.3;
         }
         .about-fss-container p {
             margin-bottom: 30px;
             font-size: 1.13rem;
             text-align: justify;
             color: #333333;
+            line-height: 1.7;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
-                 .about-team-bar {
-             width: 100vw;
-             background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
-             color: #ffe082;
-             text-align: center;
-             font-size: 2.1rem;
-             font-weight: 700;
-             padding: 28px 0 20px 0;
-             letter-spacing: 1px;
-             margin-bottom: 3px;
-             border-radius: 0;
-             box-shadow: 0 2px 12px rgba(10,35,66,0.10);
-         }
+        .about-team-bar {
+            width: 100%;
+            background: linear-gradient(90deg, #0a2342 0%, #185a9d 100%);
+            color: #ffe082;
+            text-align: center;
+            font-size: 2.1rem;
+            font-weight: 700;
+            padding: 28px 0 20px 0;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+            border-radius: 0;
+            box-shadow: 0 2px 12px rgba(10,35,66,0.10);
+            box-sizing: border-box;
+        }
         .about-team-section {
-            width: 100vw;
+            width: 100%;
             background: #ffffff;
             display: flex;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 8px;
-            padding: 32px 16px 24px 16px;
+            gap: 20px;
+            padding: 40px 20px;
             margin-bottom: 3px;
-            overflow-x: auto;
+            box-sizing: border-box;
         }
         .about-team-member {
             position: relative;
             background: #fff;
             border-radius: 18px;
             box-shadow: 0 4px 18px rgba(0,0,0,0.10);
-            width: calc((100vw - 64px - 24px) / 4);
-            min-width: 200px;
+            width: calc(25% - 15px);
+            min-width: 250px;
+            max-width: 300px;
             height: 400px;
             overflow: hidden;
             display: flex;
@@ -142,6 +172,7 @@
             margin-bottom: 0;
             transition: transform 0.18s, box-shadow 0.18s;
             border: 2px solid #e9ecef;
+            box-sizing: border-box;
         }
         .about-team-member:hover {
             transform: translateY(-8px) scale(1.04);
@@ -188,78 +219,274 @@
             font-size: 1.05rem;
             margin-bottom: 4px;
         }
-        @media (max-width: 1000px) {
+        /* Large Desktop Screens */
+        @media (min-width: 1400px) {
+            .about-card {
+                padding: 60px 50px;
+            }
+            .about-fss-container h1 {
+                font-size: 2.5rem;
+            }
+            .about-fss-container p {
+                font-size: 1.25rem;
+            }
             .about-team-section {
-                gap: 6px;
-                padding: 32px 12px 24px 12px;
+                padding: 50px 40px;
+                gap: 30px;
             }
             .about-team-member {
-                width: calc((100vw - 48px - 18px) / 4);
-                min-width: 180px;
-                height: 360px;
+                width: calc(25% - 22px);
+                max-width: 350px;
+                height: 450px;
             }
         }
-        @media (max-width: 900px) {
-            .about-fss-container {
-                flex-direction: column;
-                gap: 18px;
-                border-radius: 0;
+        
+        /* Desktop Landscape */
+        @media (min-width: 1024px) and (max-width: 1399px) {
+            .about-card {
+                padding: 50px 40px;
             }
-            .about-fss-image img {
-                max-width: 98vw;
+            .about-team-section {
+                padding: 40px 30px;
             }
-            .about-fss-text, .about-fss-image {
-               padding-left: 8vw;
-               padding-right: 8vw;
+            .about-team-member {
+                width: calc(25% - 15px);
+                max-width: 320px;
             }
         }
-        @media (max-width: 700px) {
+        
+        /* Tablet Portrait */
+        @media (min-width: 768px) and (max-width: 1023px) {
             .about-fss-container {
                 flex-direction: column;
             }
             .about-card {
-                padding: 30px 20px;
+                padding: 40px 30px;
             }
             .image-card {
                 border-right: none;
                 border-bottom: 1px solid #e9ecef;
+                min-height: 300px;
             }
             .text-card {
                 border-left: none;
                 border-top: 1px solid #e9ecef;
             }
+            .about-fss-text {
+                text-align: left;
+            }
+            .about-fss-container p {
+                text-align: left;
+            }
             .about-team-section {
-                flex-direction: column;
-                align-items: center;
-                gap: 16px;
-                padding: 32px 16px 24px 16px;
+                gap: 20px;
+                padding: 30px 20px;
             }
             .about-team-member {
-                width: 90vw;
-                max-width: 350px;
-                min-width: auto;
-                height: 280px;
+                width: calc(50% - 10px);
+                min-width: 280px;
+                max-width: none;
             }
         }
         
-        @media (max-width: 480px) {
+        /* Large Mobile */
+        @media (max-width: 767px) {
+            .about-banner-img {
+                height: 40vh;
+                min-height: 250px;
+            }
+            .about-bar,
+            .about-team-bar {
+                font-size: 1.8rem;
+                padding: 22px 0 16px 0;
+            }
+            .about-fss-container {
+                flex-direction: column;
+                margin-bottom: 20px;
+            }
+            .about-card {
+                padding: 35px 25px;
+            }
+            .image-card {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+                min-height: 250px;
+            }
+            .text-card {
+                border-left: none;
+                border-top: 1px solid #e9ecef;
+            }
+            .about-fss-text {
+                text-align: left;
+            }
+            .about-fss-container h1 {
+                font-size: 1.8rem;
+                text-align: left;
+                margin-bottom: 15px;
+            }
+            .about-fss-container p {
+                font-size: 1rem;
+                text-align: left;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+            .about-fss-image {
+                min-height: 200px;
+            }
             .about-team-section {
-                gap: 12px;
-                padding: 24px 12px 16px 12px;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 25px 15px;
             }
             .about-team-member {
-                width: 95vw;
+                width: 90%;
+                max-width: 350px;
+                min-width: auto;
+                height: 320px;
+            }
+        }
+        
+        /* Standard Mobile */
+        @media (max-width: 480px) {
+            .about-banner-img {
+                height: 35vh;
+                min-height: 220px;
+            }
+            .about-bar,
+            .about-team-bar {
+                font-size: 1.5rem;
+                padding: 18px 0 12px 0;
+            }
+            .about-card {
+                padding: 30px 20px;
+            }
+            .about-fss-container h1 {
+                font-size: 1.5rem;
+                margin-bottom: 12px;
+            }
+            .about-fss-container p {
+                font-size: 0.95rem;
+                margin-bottom: 15px;
+            }
+            .about-fss-image {
+                min-height: 180px;
+            }
+            .about-team-section {
+                gap: 16px;
+                padding: 20px 12px;
+            }
+            .about-team-member {
+                width: 95%;
                 max-width: 320px;
-                height: 260px;
+                height: 280px;
             }
             .about-team-overlay {
-                padding: 24px 8px 12px 8px;
+                padding: 20px 10px 12px 10px;
             }
             .about-team-overlay .team-name {
                 font-size: 1.1rem;
             }
+            .about-team-overlay .team-email,
             .about-team-overlay .team-contact {
                 font-size: 0.95rem;
+            }
+        }
+        
+        /* Small Mobile */
+        @media (max-width: 360px) {
+            .about-banner-img {
+                height: 30vh;
+                min-height: 200px;
+            }
+            .about-bar,
+            .about-team-bar {
+                font-size: 1.3rem;
+                padding: 15px 0 10px 0;
+            }
+            .about-card {
+                padding: 25px 15px;
+            }
+            .about-fss-container h1 {
+                font-size: 1.3rem;
+            }
+            .about-fss-container p {
+                font-size: 0.9rem;
+            }
+            .about-fss-image {
+                min-height: 160px;
+            }
+            .about-team-member {
+                width: 98%;
+                max-width: 280px;
+                height: 250px;
+            }
+            .about-team-overlay {
+                padding: 16px 8px 10px 8px;
+            }
+            .about-team-overlay .team-name {
+                font-size: 1rem;
+            }
+            .about-team-overlay .team-email,
+            .about-team-overlay .team-contact {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Ultra-wide Screens */
+        @media (min-width: 1920px) {
+            .about-card {
+                padding: 70px 60px;
+            }
+            .about-fss-container h1 {
+                font-size: 3rem;
+            }
+            .about-fss-container p {
+                font-size: 1.4rem;
+            }
+            .about-team-section {
+                padding: 60px 50px;
+                gap: 40px;
+            }
+            .about-team-member {
+                max-width: 380px;
+                height: 500px;
+            }
+        }
+        
+        /* Landscape Phone Orientation */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .about-banner-img {
+                height: 80vh;
+                min-height: 250px;
+            }
+            .about-bar,
+            .about-team-bar {
+                padding: 12px 0 8px 0;
+            }
+            .about-card {
+                padding: 25px 20px;
+            }
+            .about-team-member {
+                height: 300px;
+            }
+        }
+        
+        /* Touch Device Optimizations */
+        @media (pointer: coarse) {
+            .about-team-member:hover {
+                transform: none;
+            }
+            .about-team-member:active {
+                transform: scale(0.98);
+                transition: transform 0.1s;
+            }
+        }
+        
+        /* Reduced Motion Preference */
+        @media (prefers-reduced-motion: reduce) {
+            .about-team-member {
+                transition: none;
             }
         }
       .whatsapp-float {
@@ -309,85 +536,29 @@
           right: 20px;
           font-size: 25px;
         }
-        
-        .about-banner-img {
-          height: 30vh;
-        }
-        
-        .about-bar {
-          font-size: 1.6rem;
-          padding: 20px 0 15px 0;
-        }
-        
-        .about-fss-container {
-          flex-direction: column;
-          gap: 0;
-        }
-        
-        .about-card {
-          padding: 30px 20px;
-        }
-        
-        .about-fss-container h1 {
-          font-size: 1.8rem;
-          margin-bottom: 15px;
-        }
-        
-        .about-fss-container p {
-          font-size: 1rem;
-          line-height: 1.6;
-        }
-        
-        .about-fss-image img {
-          height: 200px;
-        }
-        
-        .about-team-section {
-          flex-direction: column;
-          gap: 20px;
-          padding: 20px 3%;
-        }
-        
-        .about-team-member {
-          width: 100%;
-          max-width: 300px;
-        }
-        
-        .about-team-bar {
-          font-size: 1.6rem;
-          padding: 20px 0 15px 0;
+      }
+      
+      /* Very Small Mobile - WhatsApp Float */
+      @media (max-width: 360px) {
+        .whatsapp-float {
+          width: 45px;
+          height: 45px;
+          bottom: 15px;
+          right: 15px;
+          font-size: 20px;
         }
       }
       
-      @media (max-width: 480px) {
+      /* Print Styles */
+      @media print {
+        .whatsapp-float {
+          display: none;
+        }
         .about-banner-img {
-          height: 25vh;
+          height: 200px;
         }
-        
-        .about-bar,
-        .about-team-bar {
-          font-size: 1.4rem;
-          padding: 15px 0 10px 0;
-        }
-        
-        .about-card {
-          padding: 25px 15px;
-        }
-        
-        .about-fss-container h1 {
-          font-size: 1.5rem;
-        }
-        
-        .about-fss-container p {
-          font-size: 0.95rem;
-        }
-        
-        .about-fss-image img {
-          height: 150px;
-        }
-        
-        .about-team-member {
-          max-width: 250px;
+        .about-team-section {
+          page-break-inside: avoid;
         }
       }
     </style>
@@ -432,14 +603,14 @@
         </div>
       </div>
       <div class="about-team-member">
-        <img src="{% static 'images/contact_2.JPG' %}" alt="Team Member 2">
+        <img src="{% static 'images/contact_2.jpg' %}" alt="Team Member 2">
         <div class="about-team-overlay">
           <div class="team-name">Malik Tanveer</div>
           <div class="team-contact">Senior Supervisor</div>
         </div>
       </div>
       <div class="about-team-member">
-        <img src="{% static 'images/contact_3.JPG' %}" alt="Team Member 3">
+        <img src="{% static 'images/contact_3.jpg' %}" alt="Team Member 3">
         <div class="about-team-overlay">
           <div class="team-name">Altaf Khan</div>
           <div class="team-contact">Manager Operations & HR</div>
